@@ -1,0 +1,45 @@
+{
+  "name": "awesome-selector",
+  "description": "React, Javascript, and Typescript compatible selector.",
+  "version": "1.0.0",
+  "author": "Mostafa Mohammadzadeh",
+  "license": "MIT",
+  "main": "src/selector.js",
+  "types": "src/selector.d.ts",
+  "scripts": {
+    "test": "jest",
+    "test-cov": "jest --coverage",
+    "pub": "npm publish",
+    "deploy": "cd website && npm run build && npm run export && cd .. && find website/out -type d -exec chmod 755 {} \\; && find website/out -type f -exec chmod 644 {} \\; && git add -A && git commit -m \"[deployment auto commit]\" && git ftp push"
+  },
+  "devDependencies": {
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^28.1.3"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "keywords": [
+    "selector",
+    "language selector",
+    "react",
+    "reactjs",
+    "next",
+    "nextjs",
+    "javascript",
+    "typescript",
+    "component",
+    "module",
+    "ui",
+    "ts",
+    "js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostafaMDZH/Awesome-Selector.git"
+  },
+  "homepage": "https://awesome-selector.demos.mostafa-mdzh.ir",
+  "bugs": {
+    "url": "https://github.com/MostafaMDZH/Awesome-Selector/issues"
+  }
+}

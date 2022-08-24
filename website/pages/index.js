@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Cookies from 'universal-cookie';
 import Link from 'next/link'
 import Snackbar from 'awesome-snackbar';
+import Selector from 'awesome-selector';
 
 export default function Main(){
 
@@ -36,6 +37,647 @@ export default function Main(){
 		}
 		document.body.removeChild(textArea);
 	}
+
+    setTimeout(() => {
+        Selector({
+			// title: 'Select a language:',
+			// isSearchable: false,
+            searchPlaceholder: 'Search me...',
+			options: [
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'en',
+					name: 'English'
+				},
+				{
+					id: 'fr',
+					name: 'French'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+				{
+					id: 'es',
+					name: 'Spanish'
+				},
+			],
+			onSelect: (id, name) => {
+				console.log(id, name);
+			}
+        });
+    }, 1000);
 
     //render:
     return (

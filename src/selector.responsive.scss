@@ -1,0 +1,96 @@
+// @media only screen and (max-width: 1300px){
+//     @media (orientation: portrait){
+//         .Selector{
+//             > #window{
+//                 max-height: 820px;
+//             }
+//         }
+//     }
+// }
+// @media only screen and (max-width: 1200px){
+//     @media (orientation: portrait){
+//         .Selector{
+//             > #window{
+//                 max-height: 930px;
+//             }
+//         }
+//     }
+// }
+// @media only screen and (max-width: 1000px){
+//     @media (orientation: portrait){
+//         .Selector{
+//             > #window{
+//                 max-height: 1160px;
+//             }
+//         }
+//     }
+// }
+// @media only screen and (max-width: 900px){
+//     .Selector{
+//         > #window{
+//             > #toolbar{
+//                 > #searchInput{
+//                     width: calc(100% - 40px);
+//                     height: 45px;
+//                 }
+//                 > #recentLanWrapper{
+//                     width: 100%;
+//                     height: auto;
+//                     padding: 0 11px 3px;
+//                     > .languageButton{
+//                         padding-left: 10px;
+//                         padding-right: 10px;
+//                     }
+//                 }
+//             }
+//             > #allLanContainer{
+//                 height: calc(100% - 95px);
+//             }
+//         }
+//     }
+//     @media (orientation: portrait){
+//         .Selector{
+//             > #window{
+//                 max-height: 1200px;
+//             }
+//         }
+//     }
+// }
+// @media only screen and (max-width: 800px){
+//     @media (orientation: portrait){
+//         .Selector{
+//             > #window{
+//                 max-height: 1400px;
+//             }
+//         }
+//     }
+// }
+// @media only screen and (max-width: 800px){
+//     .Selector{
+//         > #window{
+//             width: 100%;
+//             max-width: unset !important;
+//             height: 85%;
+//             padding-top: 10px;
+//             border: none;
+//             border-top-left-radius: 15px;
+//             border-top-right-radius: 15px;
+//             border-bottom-left-radius: 0;
+//             border-bottom-right-radius: 0;
+//             box-shadow: 0 1px 40px rgb(70, 70, 70);
+//             position: fixed;
+//             top: unset;
+//             bottom: 0;
+//             left: 0;
+//             transform: translate(0, 0);
+//             > #toolbar{
+//                 > #closeButton{
+//                     // background-image: url(../../assets/ArrowDown_66.svg);
+//                 }
+//             }
+//             > #allLanContainer{
+//                 padding-right: 0;
+//             }
+//         }
+//     }
+// }

@@ -1,0 +1,46 @@
+//scrollbar:
+@media (hover: hover) and (pointer: fine){
+
+    .thinScrollbar::-webkit-scrollbar{
+        width: 4px;
+        height: 4px;
+    }
+    .thinScrollbar::-webkit-scrollbar-track{
+        background: transparent;
+    }
+    .thinScrollbar::-webkit-scrollbar-thumb{
+        background: #ccc;
+        border-radius: 20px;
+    }
+
+    //dark mode:
+    .darkMode{
+        .thinScrollbar::-webkit-scrollbar-thumb{
+            background: #555;
+        }
+    }
+
+}
+
+//light transparent background:
+.transparentBackground:enabled:active{
+    background-color: rgba(0, 0, 0, 0.06) !important;
+}
+@media (hover: hover) and (pointer: fine){
+    .transparentBackground{
+        transition: background-color 150ms;
+    }    
+    .transparentBackground:enabled:hover{
+        background-color: rgba(0, 0, 0, 0.04) !important;
+    }
+    .transparentBackground:enabled:focus{
+        background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+    .transparentBackground:enabled:active{
+        background-color: rgba(0, 0, 0, 0.09) !important;
+    }
+}
+.transparentBackground:disabled{
+     opacity: 0.5;
+     cursor: default;
+}

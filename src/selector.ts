@@ -1,64 +1,97 @@
-module.exports = (title: string, parameters: object) => {return new Selector({title, ...parameters});}
+module.exports = (parameters:classParameters) => {return new Selector(parameters)}
 
-class Selector{
+//custom types:
+type option = {//todo: check the types
+    id: string;
+    name: string;
+}
+type classParameters = {
+    title?:             string;
+    options:            option[];
+    recentSelects?:     option[];
+    currentOptionId?:     string;
+    isSearchable?:      boolean;
+    searchPlaceholder?: string;
+    maxColumns?:        number;
+    maxRows?:           number;
+    theme?:             string;
+    style?:             object;
+    onSelect:     (id:string, name:string) => void;
+    afterHide?:   () => void;
+}
+
+class Selector{    
     
     //default values:
-    public static readonly DEFAULT_HIDING_TIMEOUT: number = 4000;
-    public static readonly DEFAULT_POSITION: string = 'bottom';
+    public static readonly ROW_HEIGHT: number = 40;
+    public static readonly COLUMN_WIDTH: number = 187;
 
     //object properties:
-    protected viewID:           number;
-    protected view:             HTMLElement;
-    protected title:            string;
-    protected position:         string;
-    protected theme:            string | undefined;
-    protected style:            object | undefined;
-    protected bornTime:         number;
-    protected waitForEvent:     boolean;
-    protected hideEventHandler: EventListenerOrEventListenerObject;
-    protected timeout:          number;
-    protected isWaitingForHide: boolean;
-    protected afterHide:    (() => void) | undefined;
+    protected viewID:            number;
+    protected view:              HTMLElement;
+    protected title:             string;
+    protected allOptions:        option[];
+    protected optionsToShow:     option[];
+    protected recentSelects:     option[] | undefined;
+    protected currentOptionId:     string   | undefined;
+    protected isSearchable:      boolean;
+    protected searchPlaceholder: string;
+    protected maxColumns:        number;
+    protected maxRows:           number;
+    protected rowsNumber:        number;
+    // protected numberOfColumns:   number;
+    // protected columns:           number;
+    protected theme:             string   | undefined;
+    protected style:             object   | undefined;
+    protected onSelect:    (id:string, name:string) => void;
+    protected afterHide:   (() => void)   | undefined;
 
     //constructor:
-    constructor(parameters: {
-            title:         string,
-            position?:     string,
-            theme?:        string,
-            style?:        object,
-            waitForEvent?: boolean,
-            timeout?:      number,
-            afterHide?:() => void
-        }){
-
-        this.bornTime = Date.now();
-        this.hideEventHandler = this.handleHideEvent.bind(this);
+    constructor(parameters:classParameters){
 
         //append CSS styles to DOM:
-        Selector.appendCSS();//comment at dev mode
+        // Selector.appendCSS();//comment at dev mode
 
         //the view:
         this.viewID = Selector.generateViewID();
-        let view = Selector.getDOM(this.viewID);
+        let view    = Selector.getHtml(this.viewID);
         document.body.appendChild(view);
-        this.view = document.getElementById(this.viewID.toString()) || document.createElement('div');
-        
-        //set properties:
-        this.setTitle(this.title = parameters.title);
-        this.setPosition(this.position = parameters.position || Selector.DEFAULT_POSITION);
-        this.setTheme(parameters.theme);
-        this.setStyle(parameters.style);
-        this.waitForEvent = parameters.waitForEvent ?? false;
-        this.timeout = parameters.timeout ?? Selector.DEFAULT_HIDING_TIMEOUT;
-        this.isWaitingForHide = false;
-        this.afterHide = parameters.afterHide;
-        
-        //hide events:
-        this.addHideEventListener();
+        this.view   = document.getElementById(this.viewID.toString()) || document.createElement('div');
 
-        //don't wait for an event:
-        if(!this.waitForEvent)
-            this.startHidingTimer(this.timeout);
+        //set properties:
+        this.setTitle(this.title = parameters.title || '');
+        this.allOptions        = parameters.options;
+        this.optionsToShow     = parameters.options;
+        this.recentSelects     = parameters.recentSelects;
+        this.currentOptionId   = parameters.currentOptionId;
+        this.isSearchable      = parameters.isSearchable ?? true;
+        this.setSearchPlaceholder(this.searchPlaceholder = parameters.searchPlaceholder || '');
+        this.maxColumns        = parameters.maxColumns || 7;
+        this.maxRows           = parameters.maxRows || 16;
+        this.rowsNumber        = 1;
+        this.onSelect          = parameters.onSelect;
+        this.afterHide         = parameters.afterHide;
+        
+        // this.setTheme(parameters.theme);
+        // this.setStyle(parameters.style);
+
+        //showRecentSelects:
+        this.showRecentSelects();
+
+        //showAllOptions:
+        this.showAllOptions(true);
+
+        //add event to window:
+        let thisView = this;
+        window.addEventListener('resize', () => {
+            thisView.showAllOptions(true);
+        });
+
+        //add event to search input:
+        this.addEventToSearch();
+
+        //add event to close button:
+        this.addEventToClose();
         
         //finally show:
         this.show();
@@ -68,9 +101,9 @@ class Selector{
     //appendCSS:
     protected static appendCSS():void{
         if(document.getElementById('selector-style') === null){
-            let head = document.head || document.getElementsByTagName('head')[0];
+            let head  = document.head || document.getElementsByTagName('head')[0];
             let style = document.createElement('style');
-            style.id = 'selector-style';
+            style.id  = 'selector-style';
             head.appendChild(style);
             style.appendChild(document.createTextNode(Style));
         }
@@ -85,99 +118,236 @@ class Selector{
         return Selector.generateViewID();
 	}
 
-    //getDOM:
-    protected static getDOM(viewId: number):ChildNode{
-        const DOM = `
-            <div class="selector" id="${viewId}">
+    //getHtml:
+    protected static getHtml(viewID:number):ChildNode{
+        const html = `
+            <div class="selector" id="${viewID}">
+                <div class="shadow"></div>
                 <div class="container">
-                    <p class="title"></p>
+                    <div class="window">
+                        <div class="toolbar">
+                            <a class="title"></a>
+                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder="">
+                            <div class="recentSelectsWrapper">
+                                <!-- //this is the structure of the recently selected options that will generate dynamically with js:
+                                <input type="button" class="optionButton" id="en" value="English"/>-->
+                            </div>
+                            <input type="button" class="closeButton"/>
+                        </div>
+                        <div class="optionsColumnsWrapper">
+                            <!-- //this is the button structure of a column that will generate dynamically with js:
+                            <div class="optionsColumn">
+                                <input type="button" class="optionButton" id="en" value="English"/>
+                                <input type="button" class="optionButton" id="sp" value="Spanish"/>
+                                <input type="button" class="optionButton" id="fr" value="French"/>
+                            </div/>-->
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
-        let div = document.createElement('div');
-        div.innerHTML = DOM.trim();
-        return div.firstChild || div;
+        return Selector.getChildNode(html);
 	}
+
+    //getOptionButtonHtml:
+    protected static getOptionButtonHtml(id:string, name:string, isSelected:boolean):ChildNode{
+        const html = `<input type="button" class="optionButton${isSelected ? ' selected' : ''}" id="${id}" value="${name}" title="${name}"/>`;
+        return Selector.getChildNode(html);
+    }
+
+    //getColumnHtml:
+    protected static getColumnHtml(index:number):ChildNode{
+        const html = `<div class="optionsColumn column_${index}">`;
+        return Selector.getChildNode(html);
+    }
+
+    //getChildNode:
+    protected static getChildNode(html:string):ChildNode{
+        let div = document.createElement('div');
+        div.innerHTML = html.trim();
+        return div.firstChild || div;
+    }
 
     //setTitle:
     public setTitle(title:string):void{
         this.title = title;
         let titleEl = <HTMLElement> this.view.getElementsByClassName('title')[0];
         titleEl.innerHTML = this.title;
+        this.setupHeader();
     }
 
-    //setPosition:
-    public setPosition(position:string):void{
-        this.position = position;
-        this.view.classList.remove('bottom');
-        this.view.classList.remove('top');
-        this.view.classList.add(position);
+    //setSearchPlaceholder:
+    protected setSearchPlaceholder(sph:string):void{
+        this.searchPlaceholder = sph;
+        let searchEl = <HTMLInputElement> this.view.getElementsByClassName('searchInput')[0];
+        searchEl.placeholder = this.searchPlaceholder;
+        this.setupHeader();
     }
 
-    //setTheme:
-    public setTheme(theme?:string):void{
-        if(theme === undefined) return;
-        this.theme == theme;
-        this.view.classList.remove('light');
-        this.view.classList.remove('dark');
-        this.view.classList.add(theme);
-    }
-
-    //setStyle:
-    public setStyle(style?:object):void{
-        if(style === undefined) return;
-        this.style = style;
-        for(const [className, style] of Object.entries(this.style)){
-            let root = document.getElementById(this.viewID.toString());
-            let element = <HTMLElement> root!.getElementsByClassName(className)[0];
-            if(element !== undefined) for(const property of style)
-                element.style.setProperty(property[0], property[1]);
+    //setupHeader:
+    protected setupHeader():void{
+        let titleEl  = <HTMLElement> this.view.getElementsByClassName('title')[0];
+        let searchEl = <HTMLElement> this.view.getElementsByClassName('searchInput')[0];
+        if(this.isSearchable){
+            titleEl.style.display  = 'none';
+            searchEl.style.display = 'block';
+        }else{
+            titleEl.style.display  = 'block';
+            searchEl.style.display = 'none';
         }
+    }
+
+    //showRecentSelects:
+    protected showRecentSelects():void{//todo: redesign the small input mode
+        let recentWrapper = <HTMLElement> this.view.getElementsByClassName('recentSelectsWrapper')[0];
+        this.recentSelects?.forEach((option) => {
+            let id = option.id;
+            let name = option.name;
+            let buttonHtml = Selector.getOptionButtonHtml(id, name, false);
+            recentWrapper.appendChild(buttonHtml);
+        });
+    }
+
+    //showAllOptions:
+    protected showAllOptions(neSizeCalc:boolean):void{
+        if(!neSizeCalc) this.fixTheWindow();
+        this.rowsNumber = this.calcRowsNumber();
+        this.removeAllOptions();
+        this.printColumns();
+        this.addEventToOptions();
+        if(neSizeCalc) this.releaseTheWindow();
+    }
+
+    //fixTheWindow:
+    protected fixTheWindow():void{
+        const window = <HTMLElement> this.view.getElementsByClassName('window')[0];
+        const windowWidth = window.offsetWidth;
+        const windowHeight = window.offsetHeight;
+        console.log(windowWidth, windowHeight);
+        window.style.width = windowWidth + 'px';
+        window.style.height = windowHeight + 'px';
+    }
+
+    //releaseTheWindow:
+    protected releaseTheWindow():void{
+        const window = <HTMLElement> this.view.getElementsByClassName('window')[0];
+        window.style.width = 'auto';
+        window.style.height = 'auto';
+    }
+
+    //removeAllOptions:
+    protected removeAllOptions():void{
+        let columnsWrapper = <HTMLElement> this.view.getElementsByClassName('optionsColumnsWrapper')[0];
+        columnsWrapper.innerHTML = '';
+    }
+
+    //calcRowsNumber:
+    protected calcRowsNumber():number{
+        let maxRows = this.calcMaxRows();
+        let maxColumns = this.calcMaxColumns();
+        let rowsNumber = maxRows;
+        let totalVisibleOptions = maxColumns * maxRows;
+        let optionsLength = this.optionsToShow.length;
+        if(optionsLength < totalVisibleOptions){
+            if(optionsLength < maxRows)
+                rowsNumber = optionsLength;
+            else{
+                let x = (optionsLength / 10);
+                rowsNumber = Math.ceil(Math.sqrt(x) * 5);
+            }
+        }else
+            rowsNumber = Math.ceil(optionsLength / maxColumns);
+        return rowsNumber;
+    }
+
+    //calcMaxRows:
+    protected calcMaxRows():number{
+        let columnsWrapperHeight = window.innerHeight - 270;
+        let maxRows = Math.floor(columnsWrapperHeight / Selector.ROW_HEIGHT);
+        if(maxRows > this.maxRows)
+            maxRows = this.maxRows;
+        return maxRows;
+    }
+
+    //calcMaxColumns:
+    protected calcMaxColumns():number{
+        let columnsWrapperWidth = window.innerWidth - 250;
+        let maxColumns = Math.floor(columnsWrapperWidth / Selector.COLUMN_WIDTH);
+        if(maxColumns > this.maxColumns)
+            maxColumns = this.maxColumns;
+        return maxColumns;
+    }
+
+    //printColumns:
+    protected printColumns():void{
+        if(this.optionsToShow.length === 0) return;
+        let columnsWrapper = <HTMLElement> this.view.getElementsByClassName('optionsColumnsWrapper')[0];
+        let columnCounter = 0, buttonCounter = 0;
+        while(1){
+            let columnHtml = Selector.getColumnHtml(columnCounter);
+            columnsWrapper.appendChild(columnHtml);
+            let column = <HTMLElement> this.view.getElementsByClassName('column_' + columnCounter)[0];
+            for(let j = 1; j <= this.rowsNumber; j++){
+                let isSelected = false;
+                let option = this.optionsToShow[buttonCounter];
+                if(option.id === this.currentOptionId) isSelected = true;
+                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, isSelected);
+                column.appendChild(buttonHtml);
+                buttonCounter++;
+                if(buttonCounter >= this.optionsToShow.length) return;
+            }
+            columnCounter++;
+        }
+    }
+
+    //addEventToOptions:
+    protected addEventToOptions(){
+        const buttons = document.querySelectorAll('.optionButton');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                let element = <HTMLInputElement> e?.target;
+                if(this.onSelect !== undefined)
+                    this.onSelect(element.id, element.value);
+            });
+        });
     }
 
     //show:
     protected show():void{
-        let thisView = this;
+        const thisView = this;
         setTimeout(() => {
             thisView.view.classList.add('visible');
+            setTimeout(() => {
+                const searchInput = <HTMLInputElement> this.view.getElementsByClassName('searchInput')[0];
+                searchInput.focus();
+            }, 100);
         }, 50);//slight delay between adding to DOM and running css animation
     }
 
-    //addHideEventListener:
-    protected addHideEventListener():void{
+    //addEventToSearch:
+    protected addEventToSearch(){
         const thisView = this;
-        'mousemove mousedown mouseup touchmove click keydown keyup'.split(' ').forEach((eventName) => {
-            window.addEventListener(eventName, thisView.hideEventHandler);
+        const searchInput = this.view.getElementsByClassName('searchInput')[0];
+        searchInput.addEventListener('input', (e) => {
+            const target = <HTMLInputElement> e.target;
+            const searchPhrase = target.value;
+            thisView.optionsToShow = thisView.allOptions.filter(option => option.name.toLowerCase().search(searchPhrase.toLowerCase()) >= 0) || [];
+            thisView.showAllOptions(searchPhrase === '');
         });
     }
 
-    //addHideEventListener:
-    protected removeHideEventListener():void{
+    //addEventToClose:
+    protected addEventToClose(){
         const thisView = this;
-        'mousemove mousedown mouseup touchmove click keydown keyup'.split(' ').forEach((eventName) => {
-            window.removeEventListener(eventName, thisView.hideEventHandler);
+        const closeButton = this.view.getElementsByClassName('closeButton')[0];
+        closeButton.addEventListener('click', (e) => {
+            thisView.hide();
+        });
+        const container = this.view.getElementsByClassName('container')[0];
+        container.addEventListener('click', (e) => {
+            thisView.hide();
         });
     }
-
-    //handleHideEvent:
-    protected handleHideEvent():void{
-        let timeout = this.timeout;
-        let currentTime = Date.now();
-        if(currentTime - this.bornTime > this.timeout)
-            timeout = this.timeout / 2;
-        this.startHidingTimer(timeout);
-        this.removeHideEventListener();
-    }
-
-    //startHidingTimer:
-	protected startHidingTimer(timeout: number):void{
-		if(timeout > 0 && !this.isWaitingForHide){
-            this.isWaitingForHide = true;
-			setTimeout(() => {
-				this.hide();
-			}, timeout);
-        }
-	}
 
     //hide:
     protected hide():void{
@@ -185,65 +355,32 @@ class Selector{
         const thisView = this;
         setTimeout(() => {
             thisView.view.remove();
-            if(thisView.afterHide !== undefined)
-                thisView.afterHide();
-        }, 800);//long enough to make sure that it is hidden
+        }, 500);//long enough to make sure that it is hidden
     }
+
+    // //setTheme:
+    // public setTheme(theme?:string):void{
+    //     if(theme === undefined) return;
+    //     this.theme == theme;
+    //     this.view.classList.remove('light');
+    //     this.view.classList.remove('dark');
+    //     this.view.classList.add(theme);
+    // }
+
+    // //setStyle:
+    // public setStyle(style?:object):void{
+    //     if(style === undefined) return;
+    //     this.style = style;
+    //     for(const [className, style] of Object.entries(this.style)){
+    //         let root = document.getElementById(this.viewID.toString());
+    //         let element = <HTMLElement> root!.getElementsByClassName(className)[0];
+    //         if(element !== undefined) for(const property of style)
+    //             element.style.setProperty(property[0], property[1]);
+    //     }
+    // }
 
 }
 
 const Style = `
-.selector {
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
-    opacity: 0;
-    transition: top 400ms ease-in-out 0s, bottom 400ms ease-in-out 0s, opacity 500ms ease-in-out 0ms;
-  }
-  .selector > .container {
-    box-sizing: border-box;
-    max-width: 350px;
-    border-radius: 23px;
-    background-color: rgb(58, 58, 58);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-  }
-  .selector > .container > .title {
-    box-sizing: border-box;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 0.9375rem;
-    color: rgb(240, 240, 240);
-    margin: 0;
-  }
-  
-  .selector.visible {
-    opacity: 1;
-  }
-  
-  .selector.bottom {
-    bottom: 25px;
-  }
-  
-  .selector.top {
-    top: 25px;
-  }
-  
-  .selector.light > .container {
-    background-color: #fbfbfb;
-  }
-  .selector.light > .container > .title {
-    color: #555;
-  }
-  
-  @media only screen and (max-width: 500px) {
-    .selector {
-      width: calc(100% - 24px);
-      max-width: unset;
-      left: 12px;
-      transform: translate(0, 0);
-      display: flex;
-      justify-content: center;
-    }
-  }/*# sourceMappingURL=selector.css.map */
+
 `;

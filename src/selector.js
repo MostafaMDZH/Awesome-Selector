@@ -22,14 +22,17 @@ class Selector {
         this.maxColumns = parameters.maxColumns || 7;
         this.maxRows = parameters.maxRows || 16;
         this.rowsNumber = 1;
+        this.columnsNumber = 1;
         this.onSelect = parameters.onSelect;
         this.afterHide = parameters.afterHide;
-        // this.setTheme(parameters.theme);
-        // this.setStyle(parameters.style);
-        //showRecentSelects:
+        //show recent selects:
         this.showRecentSelects();
-        //showAllOptions:
+        //show all options:
         this.showAllOptions(true);
+        //set theme;
+        this.setTheme(parameters.theme);
+        //set style:
+        this.setStyle(parameters.style);
         //add event to window:
         let thisView = this;
         window.addEventListener('resize', () => {
@@ -91,8 +94,8 @@ class Selector {
         return Selector.getChildNode(html);
     }
     //getOptionButtonHtml:
-    static getOptionButtonHtml(id, name, isSelected) {
-        const html = `<input type="button" class="optionButton${isSelected ? ' selected' : ''}" id="${id}" value="${name}" title="${name}"/>`;
+    static getOptionButtonHtml(id, name, number, isSelected) {
+        const html = `<input type="button" class="optionButton${isSelected ? ' selected' : ''}" id="${id}" value="${name}" number="${number}" title="${name}"/>`;
         return Selector.getChildNode(html);
     }
     //getColumnHtml:
@@ -137,11 +140,13 @@ class Selector {
     showRecentSelects() {
         var _a;
         let recentWrapper = this.view.getElementsByClassName('recentSelectsWrapper')[0];
+        let columnNumber = 0;
         (_a = this.recentSelects) === null || _a === void 0 ? void 0 : _a.forEach((option) => {
             let id = option.id;
             let name = option.name;
-            let buttonHtml = Selector.getOptionButtonHtml(id, name, false);
+            let buttonHtml = Selector.getOptionButtonHtml(id, name, (columnNumber + "_0"), false);
             recentWrapper.appendChild(buttonHtml);
+            columnNumber++;
         });
     }
     //showAllOptions:
@@ -160,7 +165,6 @@ class Selector {
         const window = this.view.getElementsByClassName('window')[0];
         const windowWidth = window.offsetWidth;
         const windowHeight = window.offsetHeight;
-        console.log(windowWidth, windowHeight);
         window.style.width = windowWidth + 'px';
         window.style.height = windowHeight + 'px';
     }
@@ -215,35 +219,48 @@ class Selector {
         if (this.optionsToShow.length === 0)
             return;
         let columnsWrapper = this.view.getElementsByClassName('optionsColumnsWrapper')[0];
-        let columnCounter = 0, buttonCounter = 0;
+        let buttonCounter = 0;
+        this.columnsNumber = 0;
         while (1) {
-            let columnHtml = Selector.getColumnHtml(columnCounter);
+            let columnHtml = Selector.getColumnHtml(this.columnsNumber);
             columnsWrapper.appendChild(columnHtml);
-            let column = this.view.getElementsByClassName('column_' + columnCounter)[0];
+            let column = this.view.getElementsByClassName('column_' + this.columnsNumber)[0];
             for (let j = 1; j <= this.rowsNumber; j++) {
                 let isSelected = false;
                 let option = this.optionsToShow[buttonCounter];
+                let number = this.columnsNumber + '_' + j;
                 if (option.id === this.currentOptionId)
                     isSelected = true;
-                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, isSelected);
+                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, number, isSelected);
                 column.appendChild(buttonHtml);
                 buttonCounter++;
                 if (buttonCounter >= this.optionsToShow.length)
                     return;
             }
-            columnCounter++;
+            this.columnsNumber++;
         }
     }
-    //addEventToOptions:
-    addEventToOptions() {
-        const buttons = document.querySelectorAll('.optionButton');
-        buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                let element = e === null || e === void 0 ? void 0 : e.target;
-                if (this.onSelect !== undefined)
-                    this.onSelect(element.id, element.value);
-            });
-        });
+    //setTheme:
+    setTheme(theme) {
+        if (theme === undefined)
+            return;
+        this.theme == theme;
+        this.view.classList.remove('light');
+        this.view.classList.remove('dark');
+        this.view.classList.add(theme);
+    }
+    //setStyle:
+    setStyle(style) {
+        if (style === undefined)
+            return;
+        this.style = style;
+        for (const [className, style] of Object.entries(this.style)) {
+            let root = document.getElementById(this.viewID.toString());
+            let element = root.getElementsByClassName(className)[0];
+            if (element !== undefined)
+                for (const property of style)
+                    element.style.setProperty(property[0], property[1]);
+        }
     }
     //show:
     show() {
@@ -256,26 +273,91 @@ class Selector {
             }, 100);
         }, 50); //slight delay between adding to DOM and running css animation
     }
+    //addEventToOptions:
+    addEventToOptions() {
+        const buttons = this.view.querySelectorAll('.optionButton');
+        buttons.forEach(button => {
+            button.addEventListener('click', e => {
+                let element = e === null || e === void 0 ? void 0 : e.target;
+                if (this.onSelect !== undefined)
+                    this.onSelect(element.id, element.value);
+            });
+        });
+        this.addNavigationEvents();
+    }
     //addEventToSearch:
     addEventToSearch() {
         const thisView = this;
         const searchInput = this.view.getElementsByClassName('searchInput')[0];
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', e => {
             const target = e.target;
             const searchPhrase = target.value;
             thisView.optionsToShow = thisView.allOptions.filter(option => option.name.toLowerCase().search(searchPhrase.toLowerCase()) >= 0) || [];
             thisView.showAllOptions(searchPhrase === '');
         });
+        searchInput.addEventListener('keyup', e => {
+            const event = e;
+            if (event.key === 'ArrowDown') {
+                const columnsWrapper = this.view.getElementsByClassName('optionsColumnsWrapper')[0];
+                const firstOption = columnsWrapper.getElementsByClassName('optionButton')[0];
+                firstOption.focus();
+            }
+        });
+    }
+    //addNavigationEvents:
+    addNavigationEvents() {
+        let thisView = this;
+        const buttons = this.view.querySelectorAll('.optionButton');
+        buttons.forEach(button => {
+            button.addEventListener('keydown', e => {
+                var _a, _b, _c, _d, _e;
+                e.preventDefault();
+                const event = e;
+                const target = e.target;
+                let number = (_a = target.getAttribute('number')) !== null && _a !== void 0 ? _a : '0_0';
+                let rowCol = number.split('_');
+                let column = parseInt(rowCol[0]);
+                let row = parseInt(rowCol[1]);
+                switch (event.key) {
+                    case 'ArrowUp':
+                        (_b = thisView.getOptionButton(column, row - 1)) === null || _b === void 0 ? void 0 : _b.focus();
+                        if (row == 1)
+                            thisView.view.getElementsByClassName('searchInput')[0].focus();
+                        break;
+                    case 'ArrowDown':
+                        (_c = thisView.getOptionButton(column, row + 1)) === null || _c === void 0 ? void 0 : _c.focus();
+                        break;
+                    case 'ArrowLeft':
+                        (_d = thisView.getOptionButton(column - 1, row)) === null || _d === void 0 ? void 0 : _d.focus();
+                        break;
+                    case 'ArrowRight':
+                        (_e = thisView.getOptionButton(column + 1, row)) === null || _e === void 0 ? void 0 : _e.focus();
+                        break;
+                }
+            });
+        });
+    }
+    //getOptionButton:
+    getOptionButton(column, row) {
+        return this.view.querySelector('[number="' + column + '_' + row + '"]');
     }
     //addEventToClose:
     addEventToClose() {
         const thisView = this;
         const closeButton = this.view.getElementsByClassName('closeButton')[0];
-        closeButton.addEventListener('click', (e) => {
+        closeButton.addEventListener('click', e => {
             thisView.hide();
         });
+        const window = this.view.getElementsByClassName('window')[0];
+        window.addEventListener('click', e => {
+            e.stopPropagation();
+        });
         const container = this.view.getElementsByClassName('container')[0];
-        container.addEventListener('click', (e) => {
+        container.addEventListener('click', e => {
+            thisView.hide();
+        });
+        const shadow = this.view.getElementsByClassName('shadow')[0];
+        shadow.addEventListener('click', e => {
             thisView.hide();
         });
     }

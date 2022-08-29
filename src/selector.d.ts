@@ -31,6 +31,7 @@ declare class Selector {
     protected maxColumns: number;
     protected maxRows: number;
     protected rowsNumber: number;
+    protected columnsNumber: number;
     protected theme: string | undefined;
     protected style: object | undefined;
     protected onSelect: (id: string, name: string) => void;
@@ -39,7 +40,7 @@ declare class Selector {
     protected static appendCSS(): void;
     protected static generateViewID(): number;
     protected static getHtml(viewID: number): ChildNode;
-    protected static getOptionButtonHtml(id: string, name: string, isSelected: boolean): ChildNode;
+    protected static getOptionButtonHtml(id: string, name: string, number: string, isSelected: boolean): ChildNode;
     protected static getColumnHtml(index: number): ChildNode;
     protected static getChildNode(html: string): ChildNode;
     setTitle(title: string): void;
@@ -54,9 +55,13 @@ declare class Selector {
     protected calcMaxRows(): number;
     protected calcMaxColumns(): number;
     protected printColumns(): void;
-    protected addEventToOptions(): void;
+    setTheme(theme?: string): void;
+    setStyle(style?: object): void;
     protected show(): void;
+    protected addEventToOptions(): void;
     protected addEventToSearch(): void;
+    protected addNavigationEvents(): void;
+    protected getOptionButton(column: number, row: number): HTMLElement;
     protected addEventToClose(): void;
     protected hide(): void;
 }

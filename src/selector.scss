@@ -31,6 +31,7 @@
             min-height: 260px;
             max-height: calc(100% - 60px);
             padding: 15px 17px;
+            padding-top: 13px;
             background-color: white;
             border: solid 1px rgb(100, 100, 100);
             border-radius: 8px;
@@ -43,8 +44,8 @@
             transform: translate(-50%, -50%);
             .optionButton{
                 @extend .transparentBackground;
-                padding-left: 5px;
-                padding-right: 5px;
+                padding-left: 7px;
+                padding-right: 7px;
                 height: 35px;
                 font-size: 1rem;
                 text-align: center;
@@ -59,7 +60,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                gap: 7px;
+                gap: 4px;
                 > .title{
                     padding-left: 2px;
                     color: #333;
@@ -80,8 +81,9 @@
                     @extend .transparentBackground;
                     width: 40px;
                     height: 40px;
-                    background: transparent url(./close.svg) no-repeat center center / 15px auto;
+                    background: transparent url(./close_5a.svg) no-repeat center center / 14px auto;
                     border-radius: 50%;
+                    margin-bottom: 2px;
                 }
             }
             > .optionsColumnsWrapper{
@@ -113,9 +115,6 @@
                     > .optionButton.withIcon{
                         padding-left: 30px;
                     }
-                    > .optionButton.selected{
-                        background-color: #aaf;
-                    }
                 }
             }
         }
@@ -130,4 +129,96 @@
     }
 }
 
-@import "selector.responsive";
+.selector.dark{
+    > .container{
+        > .window{
+            background-color: #181818;
+            border-color: #1a1a1a;
+            .optionButton{
+                @extend .transparentBackground_dark;
+                color: #ccc;
+            }
+            > .toolbar{
+                border-bottom-color: #e6e6e6;
+                > .searchInput{
+                    color: #ccc;
+                }
+                > .title{
+                    color: #aaa;
+                }
+                > .closeButton{
+                    @extend .transparentBackground_dark;
+                    background-image: url(./close_bbb.svg) !important;
+                }
+            }
+            > .optionsColumnsWrapper{
+                > .optionsColumn{
+                    > .optionButton.selected{
+                        background-color: #035 !important;
+                        color: #ccc !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//mobile:
+@media only screen and (max-width: 450px){
+    .selector{
+        > .container{
+            > .window{
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                min-height: unset;
+                max-height: 85%;
+                padding-top: 20px;
+                border: unset;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                top: unset;
+                bottom: 0;
+                left: 0;
+                transform: unset;
+                > .toolbar{
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    position: relative;
+                    > .searchInput{
+                        width: calc(100% - 50px);
+                        padding-left: 30px;
+                        background-position: left 2px center;
+                    }
+                    > .recentSelectsWrapper{
+                        flex: none;
+                        width: 100%;
+                    }
+                    > .closeButton{
+                        flex: none;
+                        background-image: url('./down_5a.svg');
+                        background-size: 22px auto;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        margin: -6px -8px 0 0;
+                    }
+                }
+                > .optionsColumnsWrapper{
+                    width: calc(100% + 5px);
+                    padding-right: 5px;
+                    > .optionsColumn{
+                        width: 100%;
+                        > .optionButton{
+                            min-width: unset;
+                            max-width: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

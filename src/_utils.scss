@@ -9,7 +9,7 @@
         background: transparent;
     }
     .thinScrollbar::-webkit-scrollbar-thumb{
-        background: #ccc;
+        background: #bbb;
         border-radius: 20px;
     }
 
@@ -23,24 +23,49 @@
 }
 
 //light transparent background:
+.transparentBackground{
+    transition: background-color 50ms;
+}
 .transparentBackground:enabled:active{
-    background-color: rgba(0, 0, 0, 0.06) !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
 }
 @media (hover: hover) and (pointer: fine){
     .transparentBackground{
         transition: background-color 150ms;
-    }    
+    }
     .transparentBackground:enabled:hover{
-        background-color: rgba(0, 0, 0, 0.04) !important;
+        background-color: rgba(0, 0, 0, 0.03) !important;
     }
     .transparentBackground:enabled:focus{
-        background-color: rgba(0, 0, 0, 0.05) !important;
+        background-color: rgba(0, 0, 0, 0.04) !important;
     }
     .transparentBackground:enabled:active{
-        background-color: rgba(0, 0, 0, 0.09) !important;
+        background-color: rgba(0, 0, 0, 0.08) !important;
     }
 }
 .transparentBackground:disabled{
      opacity: 0.5;
      cursor: default;
+}
+
+//dark:
+.transparentBackground_dark{
+    transition: background-color 50ms;
+}
+.transparentBackground_dark:enabled:active{
+    background-color: rgba(255, 255, 255, 0.10) !important;
+}
+@media (hover: hover) and (pointer: fine){
+    .transparentBackground_dark{
+        transition: background-color 150ms;
+    }
+    .transparentBackground_dark:enabled:hover{
+        background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    .transparentBackground_dark:enabled:focus{
+        background-color: rgba(255, 255, 255, 0.10) !important;
+    }
+    .transparentBackground_dark:enabled:active{
+        background-color: rgba(255, 255, 255, 0.07) !important;
+    }
 }

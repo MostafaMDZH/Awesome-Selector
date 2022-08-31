@@ -4,6 +4,8 @@ module.exports = (parameters:classParameters) => {return new Selector(parameters
 type option = {//todo: check the types
     id: string;
     name: string;
+    iconSrc: string;
+    iconSize: string;
 }
 type classParameters = {
     title?:             string;
@@ -153,8 +155,17 @@ class Selector{
 	}
 
     //getOptionButtonHtml:
-    protected static getOptionButtonHtml(id:string, name:string, number:string, isSelected:boolean):ChildNode{
-        const html = `<input type="button" class="optionButton${isSelected ? ' selected' : ''}" id="${id}" value="${name}" number="${number}" title="${name}"/>`;
+    protected static getOptionButtonHtml(id:string, name:string, iconSrc:string, iconSize:string, number:string, isSelected:boolean):ChildNode{
+        const html = `
+            <input
+                type="button"
+                class="optionButton${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
+                id="${id}"
+                value="${name}"
+                number="${number}"
+                title="${name}"
+                style="${iconSrc !== '' ? ('background-image:' + "url('" + iconSrc + "');") : ''} ${iconSize !== '' ? ('background-size:' + iconSize + ';') : ''}"
+            />`;
         return Selector.getChildNode(html);
     }
 
@@ -207,7 +218,7 @@ class Selector{
         this.recentSelects?.forEach((option) => {
             let id = option.id;
             let name = option.name;
-            let buttonHtml = Selector.getOptionButtonHtml(id, name, (columnNumber + "_0"), false);
+            let buttonHtml = Selector.getOptionButtonHtml(id, name, '', '', (columnNumber + "_0"), false);
             recentWrapper.appendChild(buttonHtml);
             columnNumber++;
         });
@@ -297,7 +308,7 @@ class Selector{
                 let option = this.optionsToShow[buttonCounter];
                 let number = this.columnsNumber + '_' + j;
                 if(option.id === this.currentOptionId) isSelected = true;
-                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, number, isSelected);
+                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, option.iconSrc ?? '', option.iconSize ?? '', number, isSelected);
                 column.appendChild(buttonHtml);
                 buttonCounter++;
                 if(buttonCounter >= this.optionsToShow.length) return;

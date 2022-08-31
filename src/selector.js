@@ -94,8 +94,17 @@ class Selector {
         return Selector.getChildNode(html);
     }
     //getOptionButtonHtml:
-    static getOptionButtonHtml(id, name, number, isSelected) {
-        const html = `<input type="button" class="optionButton${isSelected ? ' selected' : ''}" id="${id}" value="${name}" number="${number}" title="${name}"/>`;
+    static getOptionButtonHtml(id, name, iconSrc, iconSize, number, isSelected) {
+        const html = `
+            <input
+                type="button"
+                class="optionButton${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
+                id="${id}"
+                value="${name}"
+                number="${number}"
+                title="${name}"
+                style="${iconSrc !== '' ? ('background-image:' + "url('" + iconSrc + "');") : ''} ${iconSize !== '' ? ('background-size:' + iconSize + ';') : ''}"
+            />`;
         return Selector.getChildNode(html);
     }
     //getColumnHtml:
@@ -144,7 +153,7 @@ class Selector {
         (_a = this.recentSelects) === null || _a === void 0 ? void 0 : _a.forEach((option) => {
             let id = option.id;
             let name = option.name;
-            let buttonHtml = Selector.getOptionButtonHtml(id, name, (columnNumber + "_0"), false);
+            let buttonHtml = Selector.getOptionButtonHtml(id, name, '', '', (columnNumber + "_0"), false);
             recentWrapper.appendChild(buttonHtml);
             columnNumber++;
         });
@@ -216,6 +225,7 @@ class Selector {
     }
     //printColumns:
     printColumns() {
+        var _a, _b;
         if (this.optionsToShow.length === 0)
             return;
         let columnsWrapper = this.view.getElementsByClassName('optionsColumnsWrapper')[0];
@@ -231,7 +241,7 @@ class Selector {
                 let number = this.columnsNumber + '_' + j;
                 if (option.id === this.currentOptionId)
                     isSelected = true;
-                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, number, isSelected);
+                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, (_a = option.iconSrc) !== null && _a !== void 0 ? _a : '', (_b = option.iconSize) !== null && _b !== void 0 ? _b : '', number, isSelected);
                 column.appendChild(buttonHtml);
                 buttonCounter++;
                 if (buttonCounter >= this.optionsToShow.length)

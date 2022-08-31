@@ -1,5 +1,3 @@
-module.exports = (parameters:classParameters) => {return new Selector(parameters)}
-
 //custom types:
 type option = {//todo: check the types
     id: string;
@@ -7,7 +5,7 @@ type option = {//todo: check the types
     iconSrc: string;
     iconSize: string;
 }
-type classParameters = {
+type constructorParameters = {
     title?:             string;
     options:            option[];
     recentSelects?:     option[];
@@ -22,7 +20,7 @@ type classParameters = {
     afterHide?:   () => void;
 }
 
-class Selector{
+export default class Selector{
     
     //default values:
     public static readonly ROW_HEIGHT: number = 40;
@@ -48,7 +46,7 @@ class Selector{
     protected afterHide:   (() => void)   | undefined;
 
     //constructor:
-    constructor(parameters:classParameters){
+    constructor(parameters:constructorParameters){
 
         //append CSS styles to DOM:
         // Selector.appendCSS();//comment at dev mode

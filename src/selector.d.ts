@@ -4,7 +4,7 @@ declare type option = {
     iconSrc: string;
     iconSize: string;
 };
-declare type classParameters = {
+declare type constructorParameters = {
     title?: string;
     options: option[];
     recentSelects?: option[];
@@ -18,7 +18,7 @@ declare type classParameters = {
     onSelect: (id: string, name: string) => void;
     afterHide?: () => void;
 };
-declare class Selector {
+export default class Selector {
     static readonly ROW_HEIGHT: number;
     static readonly COLUMN_WIDTH: number;
     protected viewID: number;
@@ -38,7 +38,7 @@ declare class Selector {
     protected style: object | undefined;
     protected onSelect: (id: string, name: string) => void;
     protected afterHide: (() => void) | undefined;
-    constructor(parameters: classParameters);
+    constructor(parameters: constructorParameters);
     protected static appendCSS(): void;
     protected static generateViewID(): number;
     protected static getHtml(viewID: number): ChildNode;
@@ -67,4 +67,4 @@ declare class Selector {
     protected addEventToClose(): void;
     protected hide(): void;
 }
-declare const Style = "\n\n";
+export {};

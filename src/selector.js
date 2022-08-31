@@ -1,5 +1,5 @@
 "use strict";
-module.exports = (parameters) => { return new Selector(parameters); };
+Object.defineProperty(exports, "__esModule", { value: true });
 class Selector {
     //constructor:
     constructor(parameters) {
@@ -381,6 +381,7 @@ class Selector {
         }, 500); //long enough to make sure that it is hidden
     }
 }
+exports.default = Selector;
 //default values:
 Selector.ROW_HEIGHT = 40;
 Selector.COLUMN_WIDTH = 187;

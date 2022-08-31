@@ -291,6 +291,7 @@ class Selector {
                 let element = e === null || e === void 0 ? void 0 : e.target;
                 if (this.onSelect !== undefined)
                     this.onSelect(element.id, element.value);
+                this.hide();
             });
         });
         this.addNavigationEvents();

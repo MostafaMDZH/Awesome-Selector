@@ -358,6 +358,7 @@ class Selector{
                 let element = <HTMLInputElement> e?.target;
                 if(this.onSelect !== undefined)
                     this.onSelect(element.id, element.value);
+                this.hide();
             });
         });
         this.addNavigationEvents();

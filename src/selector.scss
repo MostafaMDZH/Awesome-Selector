@@ -113,7 +113,10 @@
                         color: #185abc !important;
                     }
                     > .optionButton.withIcon{
-                        padding-left: 30px;
+                        padding-left: 35px;
+                        background-repeat: no-repeat;
+                        background-position: left 8px center;
+                        background-size: 17px auto;
                     }
                 }
             }

@@ -42,19 +42,6 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            .optionButton{
-                @extend .transparentBackground;
-                padding-left: 7px;
-                padding-right: 7px;
-                height: 35px;
-                font-size: 1rem;
-                text-align: center;
-                color: #333;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                border-radius: 3px;
-            }
             > .toolbar{
                 border-bottom: solid 1px #e6e6e6;
                 display: flex;
@@ -62,6 +49,7 @@
                 align-items: center;
                 gap: 4px;
                 > .title{
+                    min-width: 226px;
                     padding-left: 2px;
                     color: #333;
                 }
@@ -76,6 +64,19 @@
                     overflow: hidden;
                     display: flex;
                     gap: 5px;
+                    > .recentButton{
+                        @extend .transparentBackground;
+                        padding-left: 7px;
+                        padding-right: 7px;
+                        height: 35px;
+                        font-size: 1rem;
+                        text-align: center;
+                        color: #333;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        border-radius: 3px;
+                    }
                 }
                 > .closeButton{
                     @extend .transparentBackground;
@@ -83,6 +84,7 @@
                     height: 40px;
                     background: transparent url(./close_5a.svg) no-repeat center center / 14px auto;
                     border-radius: 50%;
+                    margin-right: -5px;
                     margin-bottom: 2px;
                 }
             }
@@ -101,16 +103,24 @@
                     flex-direction: column;
                     gap: 3px;
                     > .optionButton{
+                        @extend .transparentBackground;
                         width: 100%;
                         min-width: 167px;
                         max-width: 200px;
                         padding-left: 20px;
-                        height: 38px !important;
+                        padding-right: 7px;
+                        height: 38px;
+                        font-size: 1rem;
                         text-align: left;
+                        color: #333;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        border-radius: 3px;
                     }
                     > .optionButton.selected{
-                        background-color: #e8f0fe !important;
-                        color: #185abc !important;
+                        background-color: #e8f0fe;
+                        color: #185abc;
                     }
                     > .optionButton.withIcon{
                         padding-left: 35px;
@@ -137,17 +147,19 @@
         > .window{
             background-color: #181818;
             border-color: #1a1a1a;
-            .optionButton{
-                @extend .transparentBackground_dark;
-                color: #ccc;
-            }
             > .toolbar{
                 border-bottom-color: #e6e6e6;
                 > .searchInput{
                     color: #ccc;
                 }
                 > .title{
-                    color: #aaa;
+                    color: #ccc;
+                }
+                > .recentSelectsWrapper{
+                    > .recentButton{
+                        @extend .transparentBackground_dark;
+                        color: #ccc;
+                    }
                 }
                 > .closeButton{
                     @extend .transparentBackground_dark;
@@ -156,9 +168,13 @@
             }
             > .optionsColumnsWrapper{
                 > .optionsColumn{
+                    > .optionButton{
+                        @extend .transparentBackground_dark;
+                        color: #ccc;
+                    }
                     > .optionButton.selected{
-                        background-color: #035 !important;
-                        color: #ccc !important;
+                        background-color: #035;
+                        color: #ccc;
                     }
                 }
             }

@@ -3,24 +3,24 @@
 */
 
 //light transparent background:
-.lightTransparentBackground{
+.transparentBackground{
     transition: background-color 150ms;
 }
-.lightTransparentBackground:enabled:active{
+.transparentBackground:enabled:active{
     background-color: rgba(0, 0, 0, 0.035) !important;
 }
 @media (hover: hover) and (pointer: fine){
-    .lightTransparentBackground:enabled:hover{
+    .transparentBackground:enabled:hover{
         background-color: rgba(0, 0, 0, 0.04) !important;
     }
-    .lightTransparentBackground:enabled:focus{
+    .transparentBackground:enabled:focus{
         background-color: rgba(0, 0, 0, 0.06) !important;
     }
-    .lightTransparentBackground:enabled:active{
+    .transparentBackground:enabled:active{
         background-color: rgba(0, 0, 0, 0.07) !important;
     }
 }
-.lightTransparentBackground:disabled{
+.transparentBackground:disabled{
      opacity: 0.5;
      cursor: default;
 }

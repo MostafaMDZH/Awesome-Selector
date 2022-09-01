@@ -81,9 +81,6 @@ export default class Selector{
         //set theme;
         this.setTheme(parameters.theme);
 
-        //set style:
-        this.setStyle(parameters.style);
-
         //add event to window:
         let thisView = this;
         window.addEventListener('resize', () => {
@@ -96,6 +93,9 @@ export default class Selector{
         //add event to close button:
         this.addEventToClose();
         
+        //set style:
+        this.setStyle(parameters.style);
+
         //finally show:
         this.show();
 
@@ -329,10 +329,11 @@ export default class Selector{
         if(style === undefined) return;
         this.style = style;
         for(const [className, style] of Object.entries(this.style)){
-            let root = document.getElementById(this.viewID.toString());
-            let element = <HTMLElement> root!.getElementsByClassName(className)[0];
-            if(element !== undefined) for(const property of style)
-                element.style.setProperty(property[0], property[1]);
+            const elements = this.view.querySelectorAll('.' + className);
+            elements.forEach(element => {
+                for(const property of style)
+                    (<HTMLElement> element).style.setProperty(property[0], property[1]);
+            });
         }
     }
 

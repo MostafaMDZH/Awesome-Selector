@@ -153,11 +153,11 @@ export default class Selector{
 	}
 
     //getOptionButtonHtml:
-    protected static getOptionButtonHtml(id:string, name:string, iconSrc:string, iconSize:string, number:string, isSelected:boolean):ChildNode{
+    protected static getOptionButtonHtml(className:string, id:string, name:string, iconSrc:string, iconSize:string, number:string, isSelected:boolean):ChildNode{
         const html = `
             <input
                 type="button"
-                class="optionButton${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
+                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
                 id="${id}"
                 value="${name}"
                 number="${number}"
@@ -216,7 +216,7 @@ export default class Selector{
         this.recentSelects?.forEach((option) => {
             let id = option.id;
             let name = option.name;
-            let buttonHtml = Selector.getOptionButtonHtml(id, name, '', '', (columnNumber + "_0"), false);
+            let buttonHtml = Selector.getOptionButtonHtml('recentButton', id, name, '', '', (columnNumber + "_0"), false);
             recentWrapper.appendChild(buttonHtml);
             columnNumber++;
         });
@@ -306,7 +306,7 @@ export default class Selector{
                 let option = this.optionsToShow[buttonCounter];
                 let number = this.columnsNumber + '_' + j;
                 if(option.id === this.currentOptionId) isSelected = true;
-                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, option.iconSrc ?? '', option.iconSize ?? '', number, isSelected);
+                let buttonHtml = Selector.getOptionButtonHtml('optionButton', option.id, option.name, option.iconSrc ?? '', option.iconSize ?? '', number, isSelected);
                 column.appendChild(buttonHtml);
                 buttonCounter++;
                 if(buttonCounter >= this.optionsToShow.length) return;
@@ -351,8 +351,10 @@ export default class Selector{
 
     //addEventToOptions:
     protected addEventToOptions(){
-        const buttons = this.view.querySelectorAll('.optionButton');
-        buttons.forEach(button => {
+        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
+        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
+        const allButtons = recentButtons.concat(optionButtons);
+        allButtons.forEach(button => {
             button.addEventListener('click', e => {
                 let element = <HTMLInputElement> e?.target;
                 if(this.onSelect !== undefined)

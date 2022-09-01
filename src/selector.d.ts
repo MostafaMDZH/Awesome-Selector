@@ -42,7 +42,7 @@ export default class Selector {
     protected static appendCSS(): void;
     protected static generateViewID(): number;
     protected static getHtml(viewID: number): ChildNode;
-    protected static getOptionButtonHtml(id: string, name: string, iconSrc: string, iconSize: string, number: string, isSelected: boolean): ChildNode;
+    protected static getOptionButtonHtml(className: string, id: string, name: string, iconSrc: string, iconSize: string, number: string, isSelected: boolean): ChildNode;
     protected static getColumnHtml(index: number): ChildNode;
     protected static getChildNode(html: string): ChildNode;
     setTitle(title: string): void;

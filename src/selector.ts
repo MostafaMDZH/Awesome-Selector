@@ -130,10 +130,10 @@ export default class Selector{
                     <div class="window">
                         <div class="toolbar">
                             <a class="title"></a>
-                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder="">
+                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder=""/>
                             <div class="recentSelectsWrapper">
                                 <!-- //this is the structure of the recently selected options that will generate dynamically with js:
-                                <input type="button" class="optionButton" id="en" value="English"/>-->
+                                <input type="button" class="recentButton" id="en" value="English"/>-->
                             </div>
                             <input type="button" class="closeButton"/>
                         </div>

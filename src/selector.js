@@ -17,7 +17,7 @@ class Selector {
         this.optionsToShow = parameters.options;
         this.recentSelects = parameters.recentSelects;
         this.currentOptionId = parameters.currentOptionId;
-        this.isSearchable = (_a = parameters.isSearchable) !== null && _a !== void 0 ? _a : true;
+        this.isSearchable = (_a = parameters.isSearchable) !== null && _a !== void 0 ? _a : false;
         this.setSearchPlaceholder(this.searchPlaceholder = parameters.searchPlaceholder || '');
         this.maxColumns = parameters.maxColumns || 7;
         this.maxRows = parameters.maxRows || 16;
@@ -31,8 +31,6 @@ class Selector {
         this.showAllOptions(true);
         //set theme;
         this.setTheme(parameters.theme);
-        //set style:
-        this.setStyle(parameters.style);
         //add event to window:
         let thisView = this;
         window.addEventListener('resize', () => {
@@ -42,6 +40,8 @@ class Selector {
         this.addEventToSearch();
         //add event to close button:
         this.addEventToClose();
+        //set style:
+        this.setStyle(parameters.style);
         //finally show:
         this.show();
     }
@@ -72,10 +72,10 @@ class Selector {
                     <div class="window">
                         <div class="toolbar">
                             <a class="title"></a>
-                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder="">
+                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder=""/>
                             <div class="recentSelectsWrapper">
                                 <!-- //this is the structure of the recently selected options that will generate dynamically with js:
-                                <input type="button" class="optionButton" id="en" value="English"/>-->
+                                <input type="button" class="recentButton" id="en" value="English"/>-->
                             </div>
                             <input type="button" class="closeButton"/>
                         </div>
@@ -94,11 +94,11 @@ class Selector {
         return Selector.getChildNode(html);
     }
     //getOptionButtonHtml:
-    static getOptionButtonHtml(id, name, iconSrc, iconSize, number, isSelected) {
+    static getOptionButtonHtml(className, id, name, iconSrc, iconSize, number, isSelected) {
         const html = `
             <input
                 type="button"
-                class="optionButton${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
+                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
                 id="${id}"
                 value="${name}"
                 number="${number}"
@@ -153,7 +153,7 @@ class Selector {
         (_a = this.recentSelects) === null || _a === void 0 ? void 0 : _a.forEach((option) => {
             let id = option.id;
             let name = option.name;
-            let buttonHtml = Selector.getOptionButtonHtml(id, name, '', '', (columnNumber + "_0"), false);
+            let buttonHtml = Selector.getOptionButtonHtml('recentButton', id, name, '', '', (columnNumber + "_0"), false);
             recentWrapper.appendChild(buttonHtml);
             columnNumber++;
         });
@@ -241,7 +241,7 @@ class Selector {
                 let number = this.columnsNumber + '_' + j;
                 if (option.id === this.currentOptionId)
                     isSelected = true;
-                let buttonHtml = Selector.getOptionButtonHtml(option.id, option.name, (_a = option.iconSrc) !== null && _a !== void 0 ? _a : '', (_b = option.iconSize) !== null && _b !== void 0 ? _b : '', number, isSelected);
+                let buttonHtml = Selector.getOptionButtonHtml('optionButton', option.id, option.name, (_a = option.iconSrc) !== null && _a !== void 0 ? _a : '', (_b = option.iconSize) !== null && _b !== void 0 ? _b : '', number, isSelected);
                 column.appendChild(buttonHtml);
                 buttonCounter++;
                 if (buttonCounter >= this.optionsToShow.length)
@@ -265,11 +265,11 @@ class Selector {
             return;
         this.style = style;
         for (const [className, style] of Object.entries(this.style)) {
-            let root = document.getElementById(this.viewID.toString());
-            let element = root.getElementsByClassName(className)[0];
-            if (element !== undefined)
+            const elements = this.view.querySelectorAll('.' + className);
+            elements.forEach(element => {
                 for (const property of style)
                     element.style.setProperty(property[0], property[1]);
+            });
         }
     }
     //show:
@@ -285,8 +285,10 @@ class Selector {
     }
     //addEventToOptions:
     addEventToOptions() {
-        const buttons = this.view.querySelectorAll('.optionButton');
-        buttons.forEach(button => {
+        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
+        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
+        const allButtons = recentButtons.concat(optionButtons);
+        allButtons.forEach(button => {
             button.addEventListener('click', e => {
                 let element = e === null || e === void 0 ? void 0 : e.target;
                 if (this.onSelect !== undefined)

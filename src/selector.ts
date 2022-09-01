@@ -63,7 +63,7 @@ export default class Selector{
         this.optionsToShow     = parameters.options;
         this.recentSelects     = parameters.recentSelects;
         this.currentOptionId   = parameters.currentOptionId;
-        this.isSearchable      = parameters.isSearchable ?? true;
+        this.isSearchable      = parameters.isSearchable ?? false;
         this.setSearchPlaceholder(this.searchPlaceholder = parameters.searchPlaceholder || '');
         this.maxColumns        = parameters.maxColumns || 7;
         this.maxRows           = parameters.maxRows || 16;

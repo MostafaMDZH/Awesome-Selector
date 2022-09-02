@@ -157,7 +157,7 @@ export default class Selector{
         const html = `
             <input
                 type="button"
-                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ''}"
+                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ' unselected'}"
                 id="${id}"
                 value="${name}"
                 number="${number}"

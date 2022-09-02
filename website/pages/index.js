@@ -4,8 +4,6 @@ import Snackbar from 'awesome-snackbar';
 import Selector from 'awesome-selector';
 import * as data from '../data/options';
 
-// let isOpen = false;
-
 export default function Main(){
 
     //copyTextToClipboard:
@@ -40,15 +38,6 @@ export default function Main(){
         document.body.removeChild(textArea);
     }
 
-    //createSampleSelector:
-    const createSampleSelector = () => {
-        new Selector({
-            title: 'Pick your language',
-            options: data.sampleLanguages,
-            currentOptionId: 'en'
-        });
-    }
-
     //render:
     return (
         <div id='window' style={{scrollBehavior:'smooth'}}>
@@ -74,7 +63,7 @@ export default function Main(){
                             <a className='navLink' href='#installation'  >installation  </a>
                             <a className='navLink' href='#title'         >title         </a>
                             <a className='navLink' href='#search'        >search        </a>
-                            <a className='navLink' href='#options'       >options       </a>
+                            <a className='navLink' href='#options-format'>options format</a>
                             <a className='navLink' href='#icon-support'  >icon support  </a>
                             <a className='navLink' href='#current-option'>current option</a>
                             <a className='navLink' href='#recent-selects'>recent selects</a>
@@ -127,7 +116,15 @@ export default function Main(){
                         </div>
                         <p className='step'><a className='bold'>{'>'} step 3 : </a>start making selectors!</p>
                         <div className='codeWrapper'>
-                            <button className='codeSection executable' onClick={()=>createSampleSelector()}>
+                            <button className='codeSection executable'
+                                onClick={() => {
+                                    new Selector({
+                                        isSearchable: true,
+                                        searchPlaceholder: 'Search languages...',
+                                        options: data.allLanguages,
+                                        currentOptionId: 'af'
+                                    });
+                                }}>
                                 <p><span>new Selector</span>{"({ ... some options ... });"}</p>
                             </button>
                         </div>
@@ -139,13 +136,13 @@ export default function Main(){
                             <button className='codeSection executable'
                                 onClick={() => {
                                     new Selector({
-                                        title: 'This is the TITLE',
+                                        title: 'Pick a language',
                                         options: data.sampleLanguages
                                     });
                                 }}>
                                 <p>
                                     {"new Selector({"}<br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"title"}</span>{": 'This is the title',"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"title"}</span>{": 'Pick a language',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"options"}{": sampleLanguages"}<br></br>
                                     {"});"}
                                 </p>
@@ -155,31 +152,37 @@ export default function Main(){
 
                         {/* search */}
                         <h3 className='sectionName' id='search'><a href='#search'># Search</a></h3>
-                        <p className='sectionDescription'>If you set the isSearchable parameter to true, the search feature would be enabled, you can also specify the search input placeholder with the searchPlaceholder parameter:</p>
+                        <p className='sectionDescription'>If you set the isSearchable parameter to true, the search input would be enabled. you can also specify the search input placeholder with the searchPlaceholder parameter:</p>
                         <div className='codeWrapper'>
                             <button className='codeSection executable'
                                 onClick={() => {
                                     new Selector({
                                         isSearchable: true,
                                         searchPlaceholder: 'Search languages...',
-                                        options: data.sampleLanguages
+                                        options: data.allLanguages
                                     });
                                 }}>
                                 <p>
                                     {"new Selector({"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span>{"isSearchable"}</span>{": true,"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span>{"searchPlaceholder"}</span>{": 'Search languages...',"}<br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{"options"}{": sampleLanguages"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"options"}{": allLanguages"}<br></br>
                                     {"});"}
                                 </p>
                             </button>
                         </div>
 
-                        {/* options */}
-                        <h3 className='sectionName' id='options'><a href='#options'># Options</a></h3>
-                        <p className='sectionDescription'>Format of the options list should be like this:</p>
-                        <div className='codeWrapper'>
-                            <p className='comment'># Its an array of objects with the name and id attributes</p>
+                        {/* options format */}
+                        <h3 className='sectionName' id='options-format'><a href='#options-format'># Options Format</a></h3>
+                        <p className='sectionDescription'>The format of the options list should be like this:</p>
+                        <div className='codeWrapper executable'
+                                onClick={() => {
+                                    new Selector({
+                                        title: 'Pick a language',
+                                        options: data.sampleLanguages
+                                    });
+                                }}>
+                            <p className='comment'># It should be an array of objects with the name and id attributes</p>
                             <button className='codeSection'>
                                 <p>
                                     {"const sampleLanguages = ["}<br></br>
@@ -203,7 +206,7 @@ export default function Main(){
 
                         {/* icon support */}
                         <h3 className='sectionName' id='icon-support'><a href='#icon-support'># Icon Support</a></h3>
-                        <p className='sectionDescription'>You can add iconSrc and iconSize attributes to the option objects so your option buttons would have an icon:</p>
+                        <p className='sectionDescription'>You can add iconSrc and iconSize attributes to the option objects so your option would have an icon:</p>
                         <div className='codeWrapper'>
                             <p className='comment'># The default value of the icon size is '17px auto'</p>
                             <button className='codeSection executable'
@@ -214,7 +217,7 @@ export default function Main(){
                                     });
                                 }}>
                                 <p>
-                                    {"const sampleLanguages = ["}<br></br>
+                                    {"const sampleLanguagesWithFlags = ["}<br></br>
                                     &nbsp;&nbsp;{"{"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"name"}{": 'English',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"id"}{": 'en',"}<br></br>
@@ -225,7 +228,7 @@ export default function Main(){
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"name"}{": 'French',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"id"}{": 'fr',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span>{"iconSrc"}</span>{": 'frFlag.svg',"}<br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"iconSize"}</span>{": '20px 22px',"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"iconSize"}</span>{": '20px 28px',"}<br></br>
                                     &nbsp;&nbsp;{"},"}<br></br>
                                     &nbsp;&nbsp;{"{"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"name"}{": 'Spanish',"}<br></br>
@@ -276,7 +279,8 @@ export default function Main(){
                                 }}>
                                 <p>
                                     {"new Selector({"}<br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{"title: 'Pick a language',"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"isSearchable: true,"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"searchPlaceholder: 'Search languages',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"options: allLanguages,"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span>{"recentSelects"}</span>{": recentLanguages,"}<br></br>
                                     {"});"}
@@ -287,10 +291,16 @@ export default function Main(){
 
                         {/* theme */}
                         <h3 className='sectionName' id='theme'><a href='#theme'># Theme</a></h3>
-                        <p className='sectionDescription'>The default theme is light, but you can enable the light theme with the theme parameter:</p>
+                        <p className='sectionDescription'>The default theme is light, but you can enable the dark theme with the theme parameter:</p>
                         <div className='codeWrapper'>
                             <button className='codeSection executable'
-                                onClick={() => new Selector({ title: 'Pick a language', options: data.sampleLanguages, theme: 'dark'})}>
+                                onClick={() => {
+                                    new Selector({
+                                        title: 'Pick a language',
+                                        options: data.sampleLanguagesWithFlags,
+                                        theme: 'dark'
+                                    });
+                                }}>
                                 <p>
                                     {"new Selector({"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;<span>{"theme"}</span>{": 'dark',"}<br></br>
@@ -303,7 +313,7 @@ export default function Main(){
 
                         {/* custom style */}
                         <h3 className='sectionName' id='custom-style'><a href='#custom-style'># Custom Style</a></h3>
-                        <p className='sectionDescription'>The Awesome selector&apos;s html markup is equivalent to below:</p>
+                        <p className='sectionDescription'>The Awesome Selector&apos;s html markup is equivalent to below:</p>
                         <div className='codeWrapper'>
                             <button className='codeSection'>
                                 <p>
@@ -392,7 +402,7 @@ export default function Main(){
 
                         {/* on select */}
                         <h3 className='sectionName' id='on-select'><a href='#on-select'># On Select</a></h3>
-                        <p className='sectionDescription'>When user selects an option, the onSelect() function returns the selected option id and name:</p>
+                        <p className='sectionDescription'>When the user selects an option, the onSelect() function returns the selected option id and name:</p>
                         <div className='codeWrapper'>
                             <button className='codeSection executable'
                                 onClick={() => {

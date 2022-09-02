@@ -48,6 +48,29 @@
      cursor: default;
 }
 
+//light transparent background:
+.coloredBackground{
+    opacity: .7;
+}
+.coloredBackground:enabled:active{
+    opacity: .9;
+}
+@media (hover: hover) and (pointer: fine){
+    .coloredBackground:enabled:hover{
+        opacity: .8;
+    }
+    .coloredBackground:enabled:focus{
+        opacity: .9;
+    }
+    .coloredBackground:enabled:active{
+        opacity: 1;
+    }
+}
+.coloredBackground:disabled{
+     opacity: 0.5;
+     cursor: default;
+}
+
 //dark:
 .transparentBackground_dark{
     transition: background-color 50ms;

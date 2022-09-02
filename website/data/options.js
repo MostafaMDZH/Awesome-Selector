@@ -69,7 +69,7 @@ const sampleLanguagesWithFlags = [
         name: 'French',
         id: 'fr',
         iconSrc: frFlag.src,
-        iconSize: '20px auto'
+        iconSize: '20px 28px'
     },
     {
         name: 'German',

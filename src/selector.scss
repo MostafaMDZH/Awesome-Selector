@@ -181,13 +181,13 @@
             }
             > .optionsColumnsWrapper{
                 > .optionsColumn{
-                    > .optionButton{
+                    > .optionButton.unselected{
                         @extend .transparentBackground_dark;
                         color: #ccc;
                     }
                     > .optionButton.selected{
-                        background-color: #035;
-                        color: #ccc;
+                        background-color: #269;
+                        color: #fff;
                     }
                 }
             }
@@ -226,6 +226,7 @@
                         background-position: left 2px center;
                     }
                     > .recentSelectsWrapper{
+                        direction: ltr;
                         flex: none;
                         width: 100%;
                     }

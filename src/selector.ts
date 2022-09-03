@@ -157,7 +157,7 @@ export default class Selector{
         const html = `
             <input
                 type="button"
-                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ' unselected'}"
+                class="navButton ${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ' unselected'}"
                 id="${id}"
                 value="${name}"
                 number="${number}"
@@ -408,7 +408,15 @@ export default class Selector{
                         if(row == 1) (<HTMLInputElement> thisView.view.getElementsByClassName('searchInput')[0]).focus();
                         break;
                     case 'ArrowDown':
-                        thisView.getOptionButton(column, row + 1)?.focus();
+                        while(1){
+                            let optionButton = thisView.getOptionButton(column, row + 1);
+                            if(optionButton !== null){
+                                optionButton.focus();
+                                return;
+                            }
+                            if(column-- < 0) return;
+                        }
+
                         break;
                     case 'ArrowLeft':
                         thisView.getOptionButton(column - 1, row)?.focus();

@@ -16,8 +16,8 @@ type constructorParameters = {
     maxRows?:           number;
     theme?:             string;
     style?:             object;
-    onSelect:     (id:string, name:string) => void;
-    afterHide?:   () => void;
+    onSelect:   (id:string, name:string) => void;
+    afterHide?: () => void;
 }
 
 export default class Selector{
@@ -82,10 +82,7 @@ export default class Selector{
         this.setTheme(parameters.theme);
 
         //add event to window:
-        let thisView = this;
-        window.addEventListener('resize', () => {
-            thisView.showAllOptions(true);
-        });
+        this.addWindowSizeEvent();
         
         //add event to search input:
         this.addEventToSearch();
@@ -353,20 +350,12 @@ export default class Selector{
         }, 50);//slight delay between adding to DOM and running css animation
     }
 
-    //addEventToOptions:
-    protected addEventToOptions(){
-        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
-        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
-        const allButtons = recentButtons.concat(optionButtons);
-        allButtons.forEach(button => {
-            button.addEventListener('click', e => {
-                let element = <HTMLInputElement> e?.target;
-                if(this.onSelect !== undefined)
-                    this.onSelect(element.id, element.value);
-                this.hide();
-            });
+    //addWindowSizeEvent:
+    protected addWindowSizeEvent(){
+        window.addEventListener('resize', () => {
+            if(this.columnsNumber !== this.calcMaxColumns())
+                this.showAllOptions(true);
         });
-        this.addNavigationEvents();
     }
 
     //addEventToSearch:
@@ -389,10 +378,26 @@ export default class Selector{
         });
     }
 
+    //addEventToOptions:
+    protected addEventToOptions(){
+        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
+        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
+        const allButtons = recentButtons.concat(optionButtons);
+        allButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                let element = <HTMLInputElement> e?.target;
+                if(this.onSelect !== undefined)
+                    this.onSelect(element.id, element.value);
+                this.hide();
+            });
+        });
+        this.addNavigationEvents();
+    }
+
     //addNavigationEvents:
     protected addNavigationEvents(){
         let thisView = this;
-        const buttons = this.view.querySelectorAll('.optionButton');
+        const buttons = this.view.querySelectorAll('.navButton');
         buttons.forEach(button => {
             button.addEventListener('keydown', e => {
                 e.preventDefault();

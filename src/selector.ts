@@ -124,12 +124,20 @@ export default class Selector{
                     <div class="window">
                         <div class="toolbar">
                             <a class="title"></a>
-                            <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder=""/>
+                            <div class="searchContainer">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="-7 -7 65 65" fill="#aaa"><path d="M39.8 41.95 26.65 28.8q-1.5 1.3-3.5 2.025-2 .725-4.25.725-5.4 0-9.15-3.75T6 18.75q0-5.3 3.75-9.05 3.75-3.75 9.1-3.75 5.3 0 9.025 3.75 3.725 3.75 3.725 9.05 0 2.15-.7 4.15-.7 2-2.1 3.75L42 39.75Zm-20.95-13.4q4.05 0 6.9-2.875Q28.6 22.8 28.6 18.75t-2.85-6.925Q22.9 8.95 18.85 8.95q-4.1 0-6.975 2.875T9 18.75q0 4.05 2.875 6.925t6.975 2.875Z"/></svg>
+                                <input type="text" dir="auto" autocomplete="off" class="searchInput" placeholder=""/>
+                            </div>
                             <div class="recentSelectsWrapper">
                                 <!-- //this is the structure of the recently selected options that will generate dynamically with js:
                                 <input type="button" class="recentButton" id="en" value="English"/>-->
                             </div>
-                            <input type="button" class="closeButton"/>
+                            <button class="closeButton ">
+                                <div class="closeIcon_light"><svg fill="#5a5a5a" width="16" height="16" viewBox="-1 -2 18 18" xmlns="http://www.w3.org/2000/svg"><path d="m11.2929 3.29289c.3905-.39052 1.0237-.39052 1.4142 0 .3905.39053.3905 1.02369 0 1.41422l-3.29289 3.29289 3.29289 3.2929c.3905.3905.3905 1.0237 0 1.4142s-1.0237.3905-1.4142 0l-3.2929-3.29289-3.29289 3.29289c-.39053.3905-1.02369.3905-1.41422 0-.39052-.3905-.39052-1.0237 0-1.4142l3.2929-3.2929-3.2929-3.29289c-.39052-.39053-.39052-1.02369 0-1.41422.39053-.39052 1.02369-.39052 1.41422 0l3.29289 3.2929z" fill-rule="evenodd"/></svg></div>
+                                <div class="closeIcon_dark" ><svg fill="#bbbbbb" width="16" height="16" viewBox="-1 -2 18 18" xmlns="http://www.w3.org/2000/svg"><path d="m11.2929 3.29289c.3905-.39052 1.0237-.39052 1.4142 0 .3905.39053.3905 1.02369 0 1.41422l-3.29289 3.29289 3.29289 3.2929c.3905.3905.3905 1.0237 0 1.4142s-1.0237.3905-1.4142 0l-3.2929-3.29289-3.29289 3.29289c-.39053.3905-1.02369.3905-1.41422 0-.39052-.3905-.39052-1.0237 0-1.4142l3.2929-3.2929-3.2929-3.29289c-.39052-.39053-.39052-1.02369 0-1.41422.39053-.39052 1.02369-.39052 1.41422 0l3.29289 3.2929z" fill-rule="evenodd"/></svg></div>
+                                <div class="downIcon_light" ><svg fill="#5a5a5a" width="16" height="16" viewBox="2 1 20 20"   xmlns="http://www.w3.org/2000/svg"><path d="m8.12 9.29 3.88 3.88 3.88-3.88c.39-.39 1.02-.39 1.41 0s.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0l-4.59-4.59c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg></div>
+                                <div class="downIcon_dark"  ><svg fill="#bbbbbb" width="16" height="16" viewBox="2 1 20 20"   xmlns="http://www.w3.org/2000/svg"><path d="m8.12 9.29 3.88 3.88 3.88-3.88c.39-.39 1.02-.39 1.41 0s.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0l-4.59-4.59c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg></div>
+                            </button>
                         </div>
                         <div class="optionsColumnsWrapper">
                             <!-- //this is the button structure of a column that will generate dynamically with js:
@@ -193,10 +201,10 @@ export default class Selector{
     //setupHeader:
     protected setupHeader():void{
         let titleEl  = <HTMLElement> this.view.getElementsByClassName('title')[0];
-        let searchEl = <HTMLElement> this.view.getElementsByClassName('searchInput')[0];
+        let searchEl = <HTMLElement> this.view.getElementsByClassName('searchContainer')[0];
         if(this.isSearchable){
             titleEl.style.display  = 'none';
-            searchEl.style.display = 'block';
+            searchEl.style.display = 'flex';
         }else{
             titleEl.style.display  = 'block';
             searchEl.style.display = 'none';

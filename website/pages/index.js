@@ -8,34 +8,12 @@ export default function Main(){
 
     //copyTextToClipboard:
     const copyTextToClipboard = (text) => {
-        if(!navigator.clipboard){
-            fallbackCopyTextToClipboard(text);
-        }else{
-            navigator.clipboard.writeText(text).then(function(){
-                new Snackbar('Copied to clipboard 👍');
-            },function(err){
-                new Snackbar('cannot copy 👎');
-            });
-        }
-    }
-
-    //fallbackCopyTextToClipboard:
-    const fallbackCopyTextToClipboard = (text) => {
-        let textArea = document.createElement("textarea");
-        textArea.value          = text;
-        textArea.style.top      = "0";//avoid scrolling to bottom:
-        textArea.style.left     = "0";
-        textArea.style.position = "fixed";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try{
-            document.execCommand('copy');
-            new Snackbar('Copied to clipboard 👍');
-        }catch(err){
-            new Snackbar('cannot copy 👎');
-        }
-        document.body.removeChild(textArea);
+        if(!navigator.clipboard) return;
+        navigator.clipboard.writeText(text).then(function(){
+            new Snackbar('Copied to clipboard 👍', {position: 'top-center'});
+        },function(err){
+            new Snackbar('cannot copy 👎', {position: 'top-center'});
+        });
     }
 
     //render:
@@ -102,8 +80,6 @@ export default function Main(){
                             <p className='comment'>
                                 # html (download the selector.js file from the&nbsp;
                                 <a href='https://github.com/MostafaMDZH/Awesome-Selector/tree/main/src'>src</a>
-                                &nbsp;directory. don't forget to include the icons from the&nbsp;
-                                <a href='https://github.com/MostafaMDZH/Awesome-Selector/tree/main/src/icons'>icons</a>
                                 &nbsp;directory)
                             </p>
                             <button className='codeSection copyable' onClick={()=>copyTextToClipboard('<script src="selector.js"></script>')}>

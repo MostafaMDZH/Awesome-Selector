@@ -54,12 +54,13 @@
                     padding-left: 2px;
                     color: #333;
                 }
-                > .searchInput{
+                > .searchContainer{
                     flex: 1;
-                    padding-left: 40px;
-                    font-size: 1rem;
-                    background: transparent url(./icons/search.svg) no-repeat left 8px center / 22px auto;
-                    color: #333;
+                    > .searchInput{
+                        flex: 1;
+                        font-size: 1rem;
+                        color: #333;
+                    }
                 }
                 > .recentSelectsWrapper{
                     direction: rtl;
@@ -87,10 +88,18 @@
                     width: 40px;
                     min-width: 40px;
                     height: 40px;
-                    background: transparent url(./icons/close_5a.svg) no-repeat center center / 14px auto;
                     border-radius: 50%;
                     margin-right: -5px;
                     margin-bottom: 2px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    > *{
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    > .closeIcon_light{display: flex}
                 }
             }
             > .optionsColumnsWrapper{
@@ -176,7 +185,8 @@
                 }
                 > .closeButton{
                     @extend .transparentBackground_dark;
-                    background-image: url(./icons/close_bb.svg) !important;
+                    > *{display: none;}
+                    > .closeIcon_dark{display: flex;}
                 }
             }
             > .optionsColumnsWrapper{
@@ -221,10 +231,8 @@
                     justify-content: flex-start;
                     align-items: flex-start;
                     position: relative;
-                    > .searchInput{
+                    > .searchContainer{
                         width: calc(100% - 50px);
-                        padding-left: 30px;
-                        background-position: left 2px center;
                     }
                     > .recentSelectsWrapper{
                         direction: ltr;
@@ -233,12 +241,12 @@
                     }
                     > .closeButton{
                         flex: none;
-                        background-image: url(./icons/down_5a.svg);
-                        background-size: 22px auto;
                         position: absolute;
                         top: 0;
                         right: 0;
                         margin: -6px -8px 0 0;
+                        > *{display: none !important;}
+                        > .downIcon_light{display: flex !important;}
                     }
                 }
                 > .optionsColumnsWrapper{
@@ -256,13 +264,14 @@
         }
     }
 
-    //dark
+    //mobile dark:
     .selector.dark{
         > .container{
             > .window{
                 > .toolbar{
                     > .closeButton{
-                        background-image: url(./icons/down_5a.svg);
+                        > *{display: none !important;}
+                        > .downIcon_dark{display: flex !important;}
                     }
                 }
             }

@@ -243,4 +243,17 @@
             }
         }
     }
+
+    //dark
+    .selector.dark{
+        > .container{
+            > .window{
+                > .toolbar{
+                    > .closeButton{
+                        background-image: url('./down_5a.svg');
+                    }
+                }
+            }
+        }
+    }
 }

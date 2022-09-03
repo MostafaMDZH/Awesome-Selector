@@ -32,10 +32,7 @@ class Selector {
         //set theme;
         this.setTheme(parameters.theme);
         //add event to window:
-        let thisView = this;
-        window.addEventListener('resize', () => {
-            thisView.showAllOptions(true);
-        });
+        this.addWindowSizeEvent();
         //add event to search input:
         this.addEventToSearch();
         //add event to close button:
@@ -98,7 +95,7 @@ class Selector {
         const html = `
             <input
                 type="button"
-                class="${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ' unselected'}"
+                class="navButton ${className}${iconSrc !== '' ? ' withIcon' : ''}${isSelected ? ' selected' : ' unselected'}"
                 id="${id}"
                 value="${name}"
                 number="${number}"
@@ -149,7 +146,7 @@ class Selector {
     showRecentSelects() {
         var _a;
         let recentWrapper = this.view.getElementsByClassName('recentSelectsWrapper')[0];
-        let columnNumber = 0;
+        let columnNumber = 1;
         (_a = this.recentSelects) === null || _a === void 0 ? void 0 : _a.forEach((option) => {
             let id = option.id;
             let name = option.name;
@@ -165,6 +162,10 @@ class Selector {
         this.rowsNumber = this.calcRowsNumber();
         this.removeAllOptions();
         this.printColumns();
+        if (this.columnsNumber === 1) {
+            const optionsColumn = this.view.getElementsByClassName('optionsColumn')[0];
+            optionsColumn.classList.add('singleColumn');
+        }
         this.addEventToOptions();
         if (neSizeCalc)
             this.releaseTheWindow();
@@ -230,7 +231,7 @@ class Selector {
             return;
         let columnsWrapper = this.view.getElementsByClassName('optionsColumnsWrapper')[0];
         let buttonCounter = 0;
-        this.columnsNumber = 0;
+        this.columnsNumber = 1;
         while (1) {
             let columnHtml = Selector.getColumnHtml(this.columnsNumber);
             columnsWrapper.appendChild(columnHtml);
@@ -283,20 +284,12 @@ class Selector {
             }, 100);
         }, 50); //slight delay between adding to DOM and running css animation
     }
-    //addEventToOptions:
-    addEventToOptions() {
-        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
-        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
-        const allButtons = recentButtons.concat(optionButtons);
-        allButtons.forEach(button => {
-            button.addEventListener('click', e => {
-                let element = e === null || e === void 0 ? void 0 : e.target;
-                if (this.onSelect !== undefined)
-                    this.onSelect(element.id, element.value);
-                this.hide();
-            });
+    //addWindowSizeEvent:
+    addWindowSizeEvent() {
+        window.addEventListener('resize', () => {
+            if (this.columnsNumber !== this.calcMaxColumns())
+                this.showAllOptions(true);
         });
-        this.addNavigationEvents();
     }
     //addEventToSearch:
     addEventToSearch() {
@@ -317,13 +310,28 @@ class Selector {
             }
         });
     }
+    //addEventToOptions:
+    addEventToOptions() {
+        const recentButtons = Array.from(this.view.querySelectorAll('.recentButton'));
+        const optionButtons = Array.from(this.view.querySelectorAll('.optionButton'));
+        const allButtons = recentButtons.concat(optionButtons);
+        allButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                let element = e === null || e === void 0 ? void 0 : e.target;
+                if (this.onSelect !== undefined)
+                    this.onSelect(element.id, element.value);
+                this.hide();
+            });
+        });
+        this.addNavigationEvents();
+    }
     //addNavigationEvents:
     addNavigationEvents() {
         let thisView = this;
-        const buttons = this.view.querySelectorAll('.optionButton');
+        const buttons = this.view.querySelectorAll('.navButton');
         buttons.forEach(button => {
             button.addEventListener('keydown', e => {
-                var _a, _b, _c, _d, _e;
+                var _a, _b, _c, _d;
                 e.preventDefault();
                 const event = e;
                 const target = e.target;
@@ -338,13 +346,21 @@ class Selector {
                             thisView.view.getElementsByClassName('searchInput')[0].focus();
                         break;
                     case 'ArrowDown':
-                        (_c = thisView.getOptionButton(column, row + 1)) === null || _c === void 0 ? void 0 : _c.focus();
+                        while (1) {
+                            let optionButton = thisView.getOptionButton(column, row + 1);
+                            if (optionButton !== null) {
+                                optionButton.focus();
+                                return;
+                            }
+                            if (column-- < 0)
+                                return;
+                        }
                         break;
                     case 'ArrowLeft':
-                        (_d = thisView.getOptionButton(column - 1, row)) === null || _d === void 0 ? void 0 : _d.focus();
+                        (_c = thisView.getOptionButton(column - 1, row)) === null || _c === void 0 ? void 0 : _c.focus();
                         break;
                     case 'ArrowRight':
-                        (_e = thisView.getOptionButton(column + 1, row)) === null || _e === void 0 ? void 0 : _e.focus();
+                        (_d = thisView.getOptionButton(column + 1, row)) === null || _d === void 0 ? void 0 : _d.focus();
                         break;
                 }
             });

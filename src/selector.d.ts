@@ -60,8 +60,9 @@ export default class Selector {
     setTheme(theme?: string): void;
     setStyle(style?: object): void;
     protected show(): void;
-    protected addEventToOptions(): void;
+    protected addWindowSizeEvent(): void;
     protected addEventToSearch(): void;
+    protected addEventToOptions(): void;
     protected addNavigationEvents(): void;
     protected getOptionButton(column: number, row: number): HTMLElement;
     protected addEventToClose(): void;

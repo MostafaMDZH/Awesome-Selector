@@ -56,6 +56,12 @@
                 }
                 > .searchContainer{
                     flex: 1;
+                    height: fit-content;
+                    display: flex;
+                    align-items: center;
+                    > svg{
+                        min-width: 30px;
+                    }
                     > .searchInput{
                         flex: 1;
                         font-size: 1rem;
@@ -63,10 +69,9 @@
                     }
                 }
                 > .recentSelectsWrapper{
-                    direction: rtl;
+                    text-align: right;
                     height: 35px;
-                    overflow: hidden;
-                    display: inline;
+                    display: none;
                     overflow: hidden;
                     > .recentButton{
                         @extend .transparentBackground;
@@ -231,13 +236,16 @@
                     justify-content: flex-start;
                     align-items: flex-start;
                     position: relative;
+                    padding-bottom: 8px;
                     > .searchContainer{
                         width: calc(100% - 50px);
+                        flex: none;
                     }
                     > .recentSelectsWrapper{
-                        direction: ltr;
+                        text-align: left;
                         flex: none;
                         width: 100%;
+                        margin-bottom: -5px;
                     }
                     > .closeButton{
                         flex: none;

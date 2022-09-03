@@ -222,6 +222,9 @@ export default class Selector{
             recentWrapper.appendChild(buttonHtml);
             columnNumber++;
         });
+        if(this.recentSelects !== undefined)
+          if(this.recentSelects.length > 0)
+            recentWrapper.style.display = 'inline';
     }
 
     //showAllOptions:

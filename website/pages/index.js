@@ -67,6 +67,7 @@ export default function Main(){
                             <a className='navLink' href='#icon-support'  >icon support  </a>
                             <a className='navLink' href='#current-option'>current option</a>
                             <a className='navLink' href='#recent-selects'>recent selects</a>
+                            <a className='navLink' href='#column-number' >column number </a>
                             <a className='navLink' href='#theme'         >theme         </a>
                             <a className='navLink' href='#custom-style'  >custom style  </a>
                             <a className='navLink' href='#on-select'     >on select     </a>
@@ -124,7 +125,7 @@ export default function Main(){
                                         isSearchable: true,
                                         searchPlaceholder: 'Search languages...',
                                         options: data.allLanguages,
-                                        currentOptionId: 'af'
+                                        currentOptionId: 'en'
                                     });
                                 }}>
                                 <p><span>new Selector</span>{"({ ... some options ... });"}</p>
@@ -284,11 +285,36 @@ export default function Main(){
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"isSearchable: true,"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"searchPlaceholder: 'Search languages',"}<br></br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;{"options: allLanguages,"}<br></br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"recentSelects"}</span>{": recentLanguages,"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"recentSelects"}</span>{": recentLanguages"}<br></br>
                                     {"});"}
                                 </p>
                             </button>
                             <p className='comment'># Notice: format of the recent selects is the same as the options, except in recent selects you can't have icons.</p>
+                        </div>
+
+                        {/* column number */}
+                        <h3 className='sectionName' id='column-number'><a href='#column-number'># Column Number</a></h3>
+                        <p className='sectionDescription'>You can customize the max column number via the maxColumns parameter:</p>
+                        <div className='codeWrapper'>
+                            <button className='codeSection executable'
+                                onClick={() => {
+                                    new Selector({
+                                        isSearchable: true,
+                                        searchPlaceholder: 'Search languages...',
+                                        options: data.allLanguages,
+                                        maxColumns: 1
+                                    });
+                                }}>
+                                <p>
+                                    {"new Selector({"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"isSearchable: true,"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"searchPlaceholder: 'Search languages',"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{"options: allLanguages,"}<br></br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span>{"maxColumns"}</span>{": 1"}<br></br>
+                                    {"});"}
+                                </p>
+                            </button>
+                            <p className='comment'># Notice: the final column number is the minimum between the screen size, the size of the options(in a similar 4:3 ratio), and your specified number.</p>
                         </div>
 
                         {/* theme */}

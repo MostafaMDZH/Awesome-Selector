@@ -187,7 +187,7 @@ export default function Main(){
                         <h3 className='sectionName' id='icon-support'><a href='#icon-support'># Icon Support</a></h3>
                         <p className='sectionDescription'>You can add iconSrc and iconSize attributes to the option objects so your option would have an icon:</p>
                         <div className='codeWrapper'>
-                            <p className='comment'># The default value of the icon size is '17px auto'</p>
+                            <p className='comment'># The default value of the icon size is &apos;17px auto&apos;</p>
                             <button className='codeSection executable'
                                 onClick={() => {
                                     new Selector({
@@ -265,7 +265,7 @@ export default function Main(){
                                     {"});"}
                                 </p>
                             </button>
-                            <p className='comment'># Notice: format of the recent selects is the same as the options, except in recent selects you can't have icons.</p>
+                            <p className='comment'># Notice: format of the recent selects is the same as the options, except in recent selects you can&apos;t have icons.</p>
                         </div>
 
                         {/* column number */}

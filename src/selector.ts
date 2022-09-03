@@ -1,9 +1,9 @@
 //custom types:
-type option = {//todo: check the types
+type option = {
     id: string;
     name: string;
-    iconSrc: string;
-    iconSize: string;
+    iconSrc?: string;
+    iconSize?: string;
 }
 type constructorParameters = {
     title?:             string;

@@ -1,8 +1,8 @@
 declare type option = {
     id: string;
     name: string;
-    iconSrc: string;
-    iconSize: string;
+    iconSrc?: string;
+    iconSize?: string;
 };
 declare type constructorParameters = {
     title?: string;

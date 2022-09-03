@@ -16,7 +16,6 @@ declare type constructorParameters = {
     theme?: string;
     style?: object;
     onSelect: (id: string, name: string) => void;
-    afterHide?: () => void;
 };
 export default class Selector {
     static readonly ROW_HEIGHT: number;
@@ -37,7 +36,6 @@ export default class Selector {
     protected theme: string | undefined;
     protected style: object | undefined;
     protected onSelect: (id: string, name: string) => void;
-    protected afterHide: (() => void) | undefined;
     constructor(parameters: constructorParameters);
     protected static appendCSS(): void;
     protected static generateViewID(): number;

@@ -17,7 +17,6 @@ type constructorParameters = {
     theme?:             string;
     style?:             object;
     onSelect:   (id:string, name:string) => void;
-    afterHide?: () => void;
 }
 
 export default class Selector{
@@ -43,7 +42,6 @@ export default class Selector{
     protected theme:             string   | undefined;
     protected style:             object   | undefined;
     protected onSelect:    (id:string, name:string) => void;
-    protected afterHide:   (() => void)   | undefined;
 
     //constructor:
     constructor(parameters:constructorParameters){
@@ -70,7 +68,6 @@ export default class Selector{
         this.rowsNumber        = 1;
         this.columnsNumber     = 1;
         this.onSelect          = parameters.onSelect;
-        this.afterHide         = parameters.afterHide;
 
         //show recent selects:
         this.showRecentSelects();

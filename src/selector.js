@@ -24,7 +24,6 @@ class Selector {
         this.rowsNumber = 1;
         this.columnsNumber = 1;
         this.onSelect = parameters.onSelect;
-        this.afterHide = parameters.afterHide;
         //show recent selects:
         this.showRecentSelects();
         //show all options:

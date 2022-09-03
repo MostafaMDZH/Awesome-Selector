@@ -62,11 +62,14 @@
                     color: #333;
                 }
                 > .recentSelectsWrapper{
+                    direction: rtl;
+                    height: 35px;
                     overflow: hidden;
-                    display: flex;
-                    gap: 5px;
+                    display: inline;
+                    overflow: hidden;
                     > .recentButton{
                         @extend .transparentBackground;
+                        min-width: fit-content;
                         padding-left: 7px;
                         padding-right: 7px;
                         height: 35px;

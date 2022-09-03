@@ -136,6 +136,11 @@
                         background-size: 17px auto;
                     }
                 }
+                > .optionsColumn.singleColumn{
+                    .optionButton{
+                        max-width: 100%;
+                    }
+                }
             }
         }
     }

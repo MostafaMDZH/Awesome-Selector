@@ -212,7 +212,7 @@ export default class Selector{
     //showRecentSelects:
     protected showRecentSelects():void{
         let recentWrapper = <HTMLElement> this.view.getElementsByClassName('recentSelectsWrapper')[0];
-        let columnNumber = 0;
+        let columnNumber = 1;
         this.recentSelects?.forEach((option) => {
             let id = option.id;
             let name = option.name;
@@ -228,6 +228,10 @@ export default class Selector{
         this.rowsNumber = this.calcRowsNumber();
         this.removeAllOptions();
         this.printColumns();
+        if(this.columnsNumber === 1){
+            const optionsColumn = <HTMLElement> this.view.getElementsByClassName('optionsColumn')[0];
+            optionsColumn.classList.add('singleColumn');
+        }
         this.addEventToOptions();
         if(neSizeCalc) this.releaseTheWindow();
     }
@@ -296,7 +300,7 @@ export default class Selector{
         if(this.optionsToShow.length === 0) return;
         let columnsWrapper = <HTMLElement> this.view.getElementsByClassName('optionsColumnsWrapper')[0];
         let buttonCounter = 0;
-        this.columnsNumber = 0;
+        this.columnsNumber = 1;
         while(1){
             let columnHtml = Selector.getColumnHtml(this.columnsNumber);
             columnsWrapper.appendChild(columnHtml);

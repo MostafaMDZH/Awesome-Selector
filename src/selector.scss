@@ -85,6 +85,7 @@
                 > .closeButton{
                     @extend .transparentBackground;
                     width: 40px;
+                    min-width: 40px;
                     height: 40px;
                     background: transparent url(./close_5a.svg) no-repeat center center / 14px auto;
                     border-radius: 50%;

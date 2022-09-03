@@ -50,14 +50,14 @@
 
 //light transparent background:
 .coloredBackground{
-    opacity: .7;
+    opacity: .8;
 }
 .coloredBackground:enabled:active{
-    opacity: .9;
+    opacity: 1;
 }
 @media (hover: hover) and (pointer: fine){
     .coloredBackground:enabled:hover{
-        opacity: .8;
+        opacity: .85;
     }
     .coloredBackground:enabled:focus{
         opacity: .9;

@@ -58,7 +58,7 @@
                     flex: 1;
                     padding-left: 40px;
                     font-size: 1rem;
-                    background: transparent url(./search.svg) no-repeat left 8px center / 22px auto;
+                    background: transparent url(./icons/search.svg) no-repeat left 8px center / 22px auto;
                     color: #333;
                 }
                 > .recentSelectsWrapper{
@@ -87,7 +87,7 @@
                     width: 40px;
                     min-width: 40px;
                     height: 40px;
-                    background: transparent url(./close_5a.svg) no-repeat center center / 14px auto;
+                    background: transparent url(./icons/close_5a.svg) no-repeat center center / 14px auto;
                     border-radius: 50%;
                     margin-right: -5px;
                     margin-bottom: 2px;
@@ -176,7 +176,7 @@
                 }
                 > .closeButton{
                     @extend .transparentBackground_dark;
-                    background-image: url(./close_bb.svg) !important;
+                    background-image: url(./icons/close_bb.svg) !important;
                 }
             }
             > .optionsColumnsWrapper{
@@ -233,7 +233,7 @@
                     }
                     > .closeButton{
                         flex: none;
-                        background-image: url('./down_5a.svg');
+                        background-image: url(./icons/down_5a.svg);
                         background-size: 22px auto;
                         position: absolute;
                         top: 0;
@@ -262,7 +262,7 @@
             > .window{
                 > .toolbar{
                     > .closeButton{
-                        background-image: url('./down_5a.svg');
+                        background-image: url(./icons/down_5a.svg);
                     }
                 }
             }

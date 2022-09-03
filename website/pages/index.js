@@ -10,9 +10,9 @@ export default function Main(){
     const copyTextToClipboard = (text) => {
         if(!navigator.clipboard) return;
         navigator.clipboard.writeText(text).then(function(){
-            new Snackbar('Copied to clipboard 👍', {position: 'top-center'});
+            new Snackbar('Copied to clipboard 👍');
         },function(err){
-            new Snackbar('cannot copy 👎', {position: 'top-center'});
+            new Snackbar('cannot copy 👎');
         });
     }
 

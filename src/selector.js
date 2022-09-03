@@ -514,7 +514,37 @@ const Style = `
   z-index: 99999999;
 }
 .selector * {
+  padding: 0;
+  margin: 0;
+  font-family: Catamaran-Medium;
+  -webkit-tap-highlight-color: transparent;
   box-sizing: border-box;
+}
+.selector a::-moz-focus-inner,
+.selector input::-moz-focus-inner,
+.selector button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.selector a {
+  text-decoration: none;
+  outline: none;
+}
+.selector input, .selector button, .selector select {
+  border: none;
+  outline: none;
+}
+.selector input[type=button], .selector button, .selector select {
+  cursor: pointer;
+}
+.selector input:required,
+.selector input:invalid {
+  box-shadow: none;
+}
+.selector input[type=button], .selector button {
+  font-size: 1rem;
+  padding: 0;
+  background: none;
 }
 .selector > .shadow {
   width: 100%;

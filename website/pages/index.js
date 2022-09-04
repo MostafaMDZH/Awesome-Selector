@@ -31,13 +31,14 @@ export default function Main(){
                 <Link href='https://www.buymeacoffee.com/mostafamdzh'><a className='headerLink' id='coffee'>buy me a coffee! :)</a></Link>
             </header>
 
-            <div id='container'>
+            <div className='container' id='intro'>
 
                 <div id='main'>
 
                     {/* navigation */}
                     <div id='navigation'>
                         <div id='navigationWrapper'>
+                            <a className='navLink' href='#intro'         >intro         </a>
                             <a className='navLink' href='#installation'  >installation  </a>
                             <a className='navLink' href='#title'         >title         </a>
                             <a className='navLink' href='#search'        >search        </a>
@@ -64,6 +65,21 @@ export default function Main(){
                             <a id='version'>V1.0.3</a>
                         </div>
                         <p className='sectionDescription'>React, Javascript, and Typescript compatible selector</p>
+
+                        <h3 className='sectionName' id='features'><a ># Features</a></h3>
+                        <ul className='features'>
+                            <li>Custom Title</li>
+                            <li>Searchable</li>
+                            <li>Icon Support</li>
+                            <li>Recent Selects</li>
+                            <li>Custom Column Number</li>
+                            <li>Dark/Light Theme</li>
+                            <li>Custom Style</li>
+                            <li>Navigation With Arrow Keys</li>
+                            <li>Responsive Design</li>
+                            <li>Dynamic HTML</li>
+                            <li>Lightweight</li>
+                        </ul>
 
                         {/* installation */}
                         <h3 className='sectionName' id='installation'><a href='#installation'># Installation</a></h3>

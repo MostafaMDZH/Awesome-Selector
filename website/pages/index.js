@@ -61,7 +61,7 @@ export default function Main(){
                         <h3 id='awesome'><Link href='/'>Awesome</Link></h3>
                         <div id='name-versionWrapper'>
                             <h1 id='appName'><Link href='/'>Selector</Link></h1>
-                            <a id='version'>V1.0.2</a>
+                            <a id='version'>V1.0.3</a>
                         </div>
                         <p className='sectionDescription'>React, Javascript, and Typescript compatible selector</p>
 

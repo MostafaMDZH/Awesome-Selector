@@ -10,6 +10,7 @@ React, Javascript, and Typescript compatible selector<br>
 - Custom Column Number
 - Dark/Light Theme
 - Custom Style
+- Navigation With Arrow Keys
 - Responsive Design
 - Dynamic HTML
 - Lightweight

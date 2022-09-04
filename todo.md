@@ -1,2 +1,3 @@
 ## Features:
-- update on fly(nested options)
+- back nav on #url
+- nested options(update on fly)

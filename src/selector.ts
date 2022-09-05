@@ -577,7 +577,7 @@ const Style = `
   left: 50%;
   transform: translate(-50%, -50%);
   visibility: hidden;
-  z-index: 99999999;
+  z-index: 999999993;
 }
 .selector * {
   padding: 0;

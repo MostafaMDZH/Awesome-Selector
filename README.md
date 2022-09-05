@@ -1,8 +1,8 @@
 # Awesome Selector
-React, Javascript, and Typescript compatible selector<br>
+React, Angular, Vue, and Typescript compatible selector<br>
 @MostafaMDZH | mostafa.mdzh@gmail.com</br></br>
 
-## Features <a href='https://awesome-selector.demos.mostafa-mdzh.ir'>[demo & documentation]</a>
+## Features <a href='https://awesome-selector.demos.mostafa-mdzh.ir'>[Docs & Demo]</a>
 - Custom Title
 - Searchable
 - Icon Support
@@ -14,4 +14,4 @@ React, Javascript, and Typescript compatible selector<br>
 - Responsive Design
 - Dynamic HTML
 - Lightweight
-- Zero Dependencies
+- Zero Dependency

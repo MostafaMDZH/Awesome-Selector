@@ -1,7 +1,7 @@
 {
   "name": "awesome-selector",
-  "description": "React, Javascript, and Typescript compatible selector.",
-  "version": "1.0.4",
+  "description": "React, Angular, Vue, and Typescript compatible selector",
+  "version": "1.0.6",
   "author": "Mostafa Mohammadzadeh",
   "license": "MIT",
   "main": "src/selector.js",
@@ -21,6 +21,8 @@
   },
   "keywords": [
     "react",
+    "angular",
+    "vue",
     "typescript",
     "next",
     "module",
@@ -36,6 +38,7 @@
     "next language select",
     "ui",
     "nextjs language select",
+    "jquery",
     "ts",
     "js"
   ],

@@ -21,7 +21,7 @@ export default function Main(){
         <div id='window' style={{scrollBehavior:'smooth'}}>
 
             <Head>
-                <title>Awesome Selector | React, Javascript, and Typescript compatible selector</title>
+                <title>Awesome Selector | React, Angular, Vue, and Typescript compatible selector</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
@@ -62,9 +62,9 @@ export default function Main(){
                         <h3 id='awesome'><Link href='/'>Awesome</Link></h3>
                         <div id='name-versionWrapper'>
                             <h1 id='appName'><Link href='/'>Selector</Link></h1>
-                            <a id='version'>V1.0.4</a>
+                            <a id='version'>V1.0.6</a>
                         </div>
-                        <p className='sectionDescription'>React, Javascript, and Typescript compatible selector</p>
+                        <p className='sectionDescription'>React, Angular, Vue, and Typescript compatible selector</p>
 
                         <h3 className='sectionName' id='features'><a ># Features</a></h3>
                         <ul className='features'>
@@ -79,6 +79,7 @@ export default function Main(){
                             <li>Responsive Design</li>
                             <li>Dynamic HTML</li>
                             <li>Lightweight</li>
+                            <li>Zero Dependency</li>
                         </ul>
 
                         {/* installation */}

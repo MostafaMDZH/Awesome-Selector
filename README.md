@@ -14,3 +14,4 @@ React, Javascript, and Typescript compatible selector<br>
 - Responsive Design
 - Dynamic HTML
 - Lightweight
+- Zero Dependencies

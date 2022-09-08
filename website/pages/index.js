@@ -18,17 +18,24 @@ export default function Main(){
             new Snackbar('cannot copy 👎');
         });
     }
-
-    //welcome snackbar:
+    
+    //welcome selector:
     const cookies = new Cookies();
     setTimeout(() => {
         if(isWelcomeSbShow) return;
         if(cookies.get('WelcomeSB') !== undefined) return;
         isWelcomeSbShow = true;
-        new Snackbar('Click on code sections to run the demo', {
-            timeout: 0,
-            actionText: 'Got it',
-            onAction: () => cookies.set('WelcomeSB', 'yes', { path: '/', maxAge: 1000*24*60*60 })
+        new Snackbar('Welcome to Awesome Selector! 👋', {
+            position: 'top-center',
+            timeout: 2000,
+            afterHide: () => {
+                new Snackbar('Click on code sections to run the demo', {
+                    position: 'top-center',
+                    timeout: 0,
+                    actionText: 'Got it',
+                    onAction: () => cookies.set('WelcomeSB', 'yes', { path: '/', maxAge: 1000*24*60*60 })
+                });
+            }
         });
     }, 2000);
 

@@ -19,7 +19,7 @@ export default function Main(){
         });
     }
     
-    //welcome selector:
+    //welcome snackbar:
     const cookies = new Cookies();
     setTimeout(() => {
         if(isWelcomeSbShow) return;

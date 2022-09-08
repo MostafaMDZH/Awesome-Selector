@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Cookies from 'universal-cookie';
-import Snackbar from 'awesome-snackbar';
-import Selector from 'awesome-selector';
-import * as data from '../data/options';
+import Cookies from 'universal-cookie'
+import Snackbar from 'awesome-snackbar'
+import Selector from 'awesome-selector'
+import * as data from '../data/options'
 
 let isWelcomeSbShow = false;
 

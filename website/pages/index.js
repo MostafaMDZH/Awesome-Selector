@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Cookies from 'universal-cookie';
 import Snackbar from 'awesome-snackbar';
 import Selector from 'awesome-selector';
 import * as data from '../data/options';
+
+let isWelcomeSbShow = false;
 
 export default function Main(){
 
@@ -15,6 +18,19 @@ export default function Main(){
             new Snackbar('cannot copy 👎');
         });
     }
+
+    //welcome snackbar:
+    const cookies = new Cookies();
+    setTimeout(() => {
+        if(isWelcomeSbShow) return;
+        if(cookies.get('WelcomeSB') !== undefined) return;
+        isWelcomeSbShow = true;
+        new Snackbar('Click on code sections to run the demo', {
+            timeout: 0,
+            actionText: 'Got it',
+            onAction: () => cookies.set('WelcomeSB', 'yes', { path: '/', maxAge: 1000*24*60*60 })
+        });
+    }, 2000);
 
     //render:
     return (

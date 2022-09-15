@@ -96,7 +96,7 @@ export default class Selector{
 	}
 
     //appendCSS:
-    protected static appendCSS():void{
+    protected static appendCSS(){
         if(document.getElementById('selector-style') === null){
             let head  = document.head || document.getElementsByTagName('head')[0];
             let style = document.createElement('style');
@@ -183,7 +183,7 @@ export default class Selector{
     }
 
     //setTitle:
-    public setTitle(title:string):void{
+    public setTitle(title:string){
         this.title = title;
         let titleEl = <HTMLElement> this.view.getElementsByClassName('title')[0];
         titleEl.innerHTML = this.title;
@@ -191,7 +191,7 @@ export default class Selector{
     }
 
     //setSearchPlaceholder:
-    protected setSearchPlaceholder(sph:string):void{
+    protected setSearchPlaceholder(sph:string){
         this.searchPlaceholder = sph;
         let searchEl = <HTMLInputElement> this.view.getElementsByClassName('searchInput')[0];
         searchEl.placeholder = this.searchPlaceholder;
@@ -199,7 +199,7 @@ export default class Selector{
     }
 
     //setupHeader:
-    protected setupHeader():void{
+    protected setupHeader(){
         let titleEl  = <HTMLElement> this.view.getElementsByClassName('title')[0];
         let searchEl = <HTMLElement> this.view.getElementsByClassName('searchContainer')[0];
         if(this.isSearchable){
@@ -212,7 +212,7 @@ export default class Selector{
     }
 
     //showRecentSelects:
-    protected showRecentSelects():void{
+    protected showRecentSelects(){
         let recentWrapper = <HTMLElement> this.view.getElementsByClassName('recentSelectsWrapper')[0];
         let columnNumber = 1;
         this.recentSelects?.forEach((option) => {
@@ -228,7 +228,7 @@ export default class Selector{
     }
 
     //showAllOptions:
-    protected showAllOptions(neSizeCalc:boolean):void{
+    protected showAllOptions(neSizeCalc:boolean){
         if(!neSizeCalc) this.fixTheWindow();
         this.rowsNumber = this.calcRowsNumber();
         this.removeAllOptions();
@@ -242,7 +242,7 @@ export default class Selector{
     }
 
     //fixTheWindow:
-    protected fixTheWindow():void{
+    protected fixTheWindow(){
         const window = <HTMLElement> this.view.getElementsByClassName('window')[0];
         const windowWidth = window.offsetWidth;
         const windowHeight = window.offsetHeight;
@@ -251,14 +251,14 @@ export default class Selector{
     }
 
     //releaseTheWindow:
-    protected releaseTheWindow():void{
+    protected releaseTheWindow(){
         const window = <HTMLElement> this.view.getElementsByClassName('window')[0];
         window.style.width = 'auto';
         window.style.height = 'auto';
     }
 
     //removeAllOptions:
-    protected removeAllOptions():void{
+    protected removeAllOptions(){
         let columnsWrapper = <HTMLElement> this.view.getElementsByClassName('optionsColumnsWrapper')[0];
         columnsWrapper.innerHTML = '';
     }
@@ -301,7 +301,7 @@ export default class Selector{
     }
 
     //printColumns:
-    protected printColumns():void{
+    protected printColumns(){
         if(this.optionsToShow.length === 0) return;
         let columnsWrapper = <HTMLElement> this.view.getElementsByClassName('optionsColumnsWrapper')[0];
         let buttonCounter = 0;
@@ -325,7 +325,7 @@ export default class Selector{
     }
 
     //setTheme:
-    public setTheme(theme?:string):void{
+    public setTheme(theme?:string){
         if(theme === undefined) return;
         this.theme == theme;
         this.view.classList.remove('light');
@@ -334,7 +334,7 @@ export default class Selector{
     }
 
     //setStyle:
-    public setStyle(style?:object):void{
+    public setStyle(style?:object){
         if(style === undefined) return;
         this.style = style;
         for(const [className, style] of Object.entries(this.style)){
@@ -347,7 +347,7 @@ export default class Selector{
     }
 
     //show:
-    protected show():void{
+    protected show(){
         const thisView = this;
         setTimeout(() => {
             thisView.view.classList.add('visible');
@@ -469,7 +469,7 @@ export default class Selector{
     }
 
     //hide:
-    protected hide():void{
+    public hide(){
         this.view.classList.remove('visible');
         const thisView = this;
         setTimeout(() => {

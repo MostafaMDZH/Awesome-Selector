@@ -64,6 +64,6 @@ export default class Selector {
     protected addNavigationEvents(): void;
     protected getOptionButton(column: number, row: number): HTMLElement;
     protected addEventToClose(): void;
-    protected hide(): void;
+    hide(): void;
 }
 export {};

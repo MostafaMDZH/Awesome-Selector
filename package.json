@@ -1,16 +1,15 @@
 {
   "name": "awesome-selector",
   "description": "React, Angular, Vue, and Typescript compatible selector",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Mostafa Mohammadzadeh",
   "license": "MIT",
   "main": "src/selector.js",
   "types": "src/selector.d.ts",
   "scripts": {
     "test": "jest",
-    "test-cov": "jest --coverage",
-    "pub": "npm publish",
-    "deploy": "cd website && npm run build && npm run export && cd .. && find website/out -type d -exec chmod 755 {} \\; && find website/out -type f -exec chmod 644 {} \\; && git add -A && git commit -m \"[deployment auto commit]\" && git ftp push"
+    "test-cov": "jest --coverage","pub": "npm test || npm update && npm publish",
+    "dep": "npm update && npm publish && cd website && npm update && npm run build && npm run export && cd .. && find website/out -type d -exec chmod 755 {} \\; && find website/out -type f -exec chmod 644 {} \\; && git add -A && git commit -m \"[deployment auto commit]\" && git ftp push"
   },
   "devDependencies": {
     "jest": "^28.1.3",

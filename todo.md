@@ -1,3 +1,4 @@
 ## Features:
-- back nav on #url
-- nested options(update on fly)
+- Back with escape button
+- Back nav on url
+- Nested options(update on fly)

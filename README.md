@@ -2,7 +2,7 @@
 React, Angular, Vue, and Typescript compatible selector<br>
 @MostafaMDZH | mostafa.mdzh@gmail.com</br></br>
 
-## Features <a href='https://awesome-selector.demos.mostafa-mdzh.ir'>[Docs & Demo]</a>
+## Features [ <a href='https://selector.awesome-components.com'>Docs & Demo</a> | <a href='https://github.com/MostafaMDZH/Awesome-Selector'>Github</a> | <a href='https://npmjs.com/package/awesome-selector'>NPM</a> ]
 - Custom Title
 - Searchable
 - Icon Support

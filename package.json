@@ -1,7 +1,7 @@
 {
   "name": "awesome-selector",
   "description": "React, Angular, Vue, and Typescript compatible selector",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Mostafa Mohammadzadeh",
   "license": "MIT",
   "main": "src/selector.js",
@@ -45,7 +45,7 @@
     "type": "git",
     "url": "git+https://github.com/MostafaMDZH/Awesome-Selector.git"
   },
-  "homepage": "https://awesome-selector.demos.mostafa-mdzh.ir",
+  "homepage": "https://selector.awesome-components.com",
   "bugs": {
     "url": "https://github.com/MostafaMDZH/Awesome-Selector/issues"
   }

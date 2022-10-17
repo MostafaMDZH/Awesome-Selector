@@ -752,7 +752,7 @@ const Style = `
   color: #0729ae;
 }
 .selector > .container > .window > .optionsColumnsWrapper > .optionsColumn > .optionButton.withIcon {
-  padding-left: 35px;
+  padding-left: 37px;
   background-repeat: no-repeat;
   background-position: left 8px center;
   background-size: 17px auto;

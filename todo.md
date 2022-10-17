@@ -1,5 +1,4 @@
 ## Bug:
-- can't select by enter key
 - container max-height on mobile cause problems
 - header should have min height
 

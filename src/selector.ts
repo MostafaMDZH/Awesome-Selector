@@ -628,7 +628,6 @@ const Style = `
 .selector > .container {
   width: 100%;
   height: 100%;
-  max-height: 800px;
   position: fixed;
   top: 50%;
   left: 50%;

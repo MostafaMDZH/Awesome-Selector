@@ -1,7 +1,3 @@
-## Bug:
-- container max-height on mobile cause problems
-- header should have min height
-
 ## Features:
 - Back with escape button
 - Back nav on url

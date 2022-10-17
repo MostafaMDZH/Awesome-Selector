@@ -16,7 +16,7 @@ type constructorParameters = {
     maxRows?:           number;
     theme?:             string;
     style?:             object;
-    onSelect:   (id:string, name:string) => void;
+    onSelect: (id:string, name:string) => void;
 }
 
 export default class Selector{
@@ -41,7 +41,7 @@ export default class Selector{
     protected columnsNumber:     number;
     protected theme:             string   | undefined;
     protected style:             object   | undefined;
-    protected onSelect:    (id:string, name:string) => void;
+    protected onSelect: (id:string, name:string) => void;
 
     //constructor:
     constructor(parameters:constructorParameters){
@@ -429,7 +429,6 @@ export default class Selector{
                             }
                             if(column-- < 0) return;
                         }
-
                         break;
                     case 'ArrowLeft':
                         thisView.getOptionButton(column - 1, row)?.focus();
@@ -437,6 +436,13 @@ export default class Selector{
                     case 'ArrowRight':
                         thisView.getOptionButton(column + 1, row)?.focus();
                         break;
+                    case 'Enter':
+                    case 'Space':
+                        let element = <HTMLInputElement> e.target;
+                        if(thisView.onSelect !== undefined)
+                            thisView.onSelect(element.id, element.value);
+                        thisView.hide();
+                    break;
                 }
             });
         });

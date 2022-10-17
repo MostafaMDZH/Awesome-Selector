@@ -372,6 +372,13 @@ class Selector {
                     case 'ArrowRight':
                         (_d = thisView.getOptionButton(column + 1, row)) === null || _d === void 0 ? void 0 : _d.focus();
                         break;
+                    case 'Enter':
+                    case 'Space':
+                        let element = e.target;
+                        if (thisView.onSelect !== undefined)
+                            thisView.onSelect(element.id, element.value);
+                        thisView.hide();
+                        break;
                 }
             });
         });

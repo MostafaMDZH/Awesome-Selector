@@ -15,3 +15,5 @@ React, Angular, Vue, and Typescript compatible selector<br>
 - Dynamic HTML
 - Lightweight
 - Zero Dependency
+
+Checkout other components in: <a href='https://awesome-components.com/'>awesome-components.com</a>

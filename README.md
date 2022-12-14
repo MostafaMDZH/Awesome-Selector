@@ -16,4 +16,4 @@ React, Angular, Vue, and Typescript compatible selector<br>
 - Lightweight
 - Zero Dependency
 
-Checkout other components in: <a href='https://awesome-components.com/'>awesome-components.com</a>
+Check out other components at: <a href='https://awesome-components.com/'>awesome-components.com</a>

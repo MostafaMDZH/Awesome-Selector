@@ -1,8 +1,4 @@
-## Bug:
-- min height for header(specially when just title is showing)
-
 ## Features:
-- Documents: scrollable code segments on mobile
 - Unique id/class
 - Back with escape button
 

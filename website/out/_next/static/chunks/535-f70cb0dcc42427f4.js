@@ -425,7 +425,7 @@
   .selector.dark > .container > .window > .toolbar > .closeButton > .downIcon_dark {
     display: flex !important;
   }
-}
+}/*# sourceMappingURL=selector.css.map */
 `},2882:function(a,b){"use strict";class c{constructor(a,b){var d,e;this.bornTime=Date.now(),this.hideEventHandler=this.handleHideEvent.bind(this),c.appendCSS(),this.viewID=c.generateViewID();let f=c.getHtml(this.viewID);document.body.appendChild(f),this.view=document.getElementById(this.viewID.toString())||document.createElement("div"),this.setMessage(this.message=a),this.setPosition(this.position=(null==b?void 0:b.position)||c.DEFAULT_POSITION),this.setTheme(null==b?void 0:b.theme),this.setIconSrc(null==b?void 0:b.iconSrc),this.setStyle(null==b?void 0:b.style),this.setActionText(null==b?void 0:b.actionText),this.setActionCallback(null==b?void 0:b.onAction),this.waitForEvent=null===(d=null==b?void 0:b.waitForEvent)|| void 0===d||d,this.timeout=null!==(e=null==b?void 0:b.timeout)&& void 0!==e?e:c.DEFAULT_HIDING_TIMEOUT,this.isWaitingForHide=!1,this.afterHide=null==b?void 0:b.afterHide,this.addHideEventListener(),this.waitForEvent||this.startHidingTimer(this.timeout),this.show()}static appendCSS(){if(null===document.getElementById("snackbar-style")){let a=document.head||document.getElementsByTagName("head")[0],b=document.createElement("style");b.id="snackbar-style",a.appendChild(b),b.appendChild(document.createTextNode(d))}}static generateViewID(){let a=Math.floor(1e9*Math.random())+1e8;return null===document.getElementById(a.toString())?a:c.generateViewID()}static getHtml(a){let b=`
             <div class="snackbar" id="${a}">
                 <div class="container">

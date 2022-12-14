@@ -1,5 +1,5 @@
 ## Bug:
-- Alert for compname.css.map on react
+- Alert for componentName.css.map on react
 - min height for header(specially when just title is showing)
 
 ## Features:

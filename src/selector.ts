@@ -870,5 +870,5 @@ const Style = `
   .selector.dark > .container > .window > .toolbar > .closeButton > .downIcon_dark {
     display: flex !important;
   }
-}/*# sourceMappingURL=selector.css.map */
+}
 `;
